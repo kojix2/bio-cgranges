@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in bio-granges.gemspec
+# Specify your gem's dependencies in bio-cgranges.gemspec
 gemspec
 
 gem "rake"

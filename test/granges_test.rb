@@ -2,30 +2,30 @@
 
 require "test_helper"
 
-class GRangesTest < Test::Unit::TestCase
+class CGRangesTest < Test::Unit::TestCase
   def test_version
-    assert_true Bio::GRanges.const_defined?(:VERSION)
+    assert_true Bio::CGRanges.const_defined?(:VERSION)
   end
 
   def test_initialize
-    granges = Bio::GRanges.new
-    assert_instance_of Bio::GRanges, granges
+    cgranges = Bio::CGRanges.new
+    assert_instance_of Bio::CGRanges, cgranges
   end
 
   def test_add
-    granges = Bio::GRanges.new
+    cgranges = Bio::CGRanges.new
     assert_nothing_raised do
-      granges.add("chr1", 10, 20, 0)
-      granges.add("chr1", 15, 25, 1)
+      cgranges.add("chr1", 10, 20, 0)
+      cgranges.add("chr1", 15, 25, 1)
     end
   end
 
   def test_index
-    granges = Bio::GRanges.new
+    cgranges = Bio::CGRanges.new
     assert_nothing_raised do
-      granges.add("chr1", 10, 20, 0)
-      granges.add("chr1", 15, 25, 1)
-      granges.index
+      cgranges.add("chr1", 10, 20, 0)
+      cgranges.add("chr1", 15, 25, 1)
+      cgranges.index
     end
   end
 end

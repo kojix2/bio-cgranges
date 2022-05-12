@@ -1,4 +1,4 @@
-#include "granges.h"
+#include "cgranges.h"
 
 #define SIZEOF_INT32 4
 #define SIZEOF_INT64 8
@@ -42,7 +42,7 @@
 #endif
 
 VALUE rb_Bio;
-VALUE rb_GRanges;
+VALUE rb_CGRanges;
 
 static void cgranges_free(void *ptr);
 static size_t cgranges_memsize(const void *ptr);
@@ -62,8 +62,10 @@ static const rb_data_type_t cgranges_type = {
 static void
 cgranges_free(void *ptr)
 {
-  // grangesClose checks for null
-  cr_destroy(ptr);
+  if(!ptr)
+  {
+    cr_destroy(ptr);
+  }
 }
 
 static size_t
@@ -114,7 +116,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 
   if (RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
-    rb_raise(rb_eRuntimeError, "Cannot add to an indexed GRanges");
+    rb_raise(rb_eRuntimeError, "Cannot add to an indexed CGRanges");
     return Qnil;
   }
 
@@ -142,7 +144,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 
   if (!intv)
   {
-    rb_raise(rb_eRuntimeError, "Error adding to GRanges");
+    rb_raise(rb_eRuntimeError, "Error adding to CGRanges");
     return Qnil;
   }
 
@@ -153,7 +155,7 @@ cgranges_index(VALUE self)
 {
   if(RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
-    rb_raise(rb_eRuntimeError, "GRanges already indexed");
+    rb_raise(rb_eRuntimeError, "CGRanges already indexed");
     return Qnil;
   }
 
@@ -165,16 +167,16 @@ cgranges_index(VALUE self)
   return self;
 }
 
-void Init_granges(void)
+void Init_cgranges(void)
 {
   rb_Bio = rb_define_module("Bio");
-  rb_GRanges = rb_define_class_under(rb_Bio, "GRanges", rb_cObject);
+  rb_CGRanges = rb_define_class_under(rb_Bio, "CGRanges", rb_cObject);
 
-  rb_define_alloc_func(rb_GRanges, cgranges_allocate);
+  rb_define_alloc_func(rb_CGRanges, cgranges_allocate);
 
-  rb_define_method(rb_GRanges, "initialize", cgranges_init, 0);
-  rb_define_method(rb_GRanges, "add", cgranges_add, 4);
-  rb_define_method(rb_GRanges, "index", cgranges_index, 0);
-  // rb_define_method(rb_GRanges, "overlap", cgranges_overlap, 4);
-  // rb_define_method(rb_GRanges, "coverage", cgranges_coverage, 4);
+  rb_define_method(rb_CGRanges, "initialize", cgranges_init, 0);
+  rb_define_method(rb_CGRanges, "add", cgranges_add, 4);
+  rb_define_method(rb_CGRanges, "index", cgranges_index, 0);
+  // rb_define_method(rb_CGRanges, "overlap", cgranges_overlap, 4);
+  // rb_define_method(rb_CGRanges, "coverage", cgranges_coverage, 4);
 }

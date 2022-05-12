@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "granges/version"
-require_relative "granges/granges"
+require_relative "cgranges/version"
+require_relative "cgranges/cgranges"
 
 module Bio
   # Reader for .2bit files (i.e., from UCSC genome browser)
-  class GRanges
+  class CGRanges
   end
 end

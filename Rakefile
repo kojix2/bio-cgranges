@@ -17,9 +17,22 @@ require "rake/extensiontask"
 
 task build: :compile
 
-Rake::ExtensionTask.new("granges") do |ext|
-  ext.lib_dir = "lib/bio/granges"
-  ext.ext_dir = "ext/bio/granges"
+Rake::ExtensionTask.new("cgranges") do |ext|
+  ext.lib_dir = "lib/bio/cgranges"
+  ext.ext_dir = "ext/bio/cgranges"
 end
 
-task default: %i[clobber compile test rubocop]
+desc "Remove object file"
+task :remove_object_file do
+  Dir["ext/**/*.{o,bundle}"].each do |f|
+    FileUtils.rm(f)
+  end
+end
+
+task default: %i[
+  clobber
+  compile
+  remove_object_file
+  test
+  rubocop
+]

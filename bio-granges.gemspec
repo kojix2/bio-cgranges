@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-require_relative "lib/bio/granges/version"
+require_relative "lib/bio/cgranges/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "bio-granges"
-  spec.version       = Bio::GRanges::VERSION
+  spec.name          = "bio-cgranges"
+  spec.version       = Bio::CGRanges::VERSION
   spec.authors       = ["kojix2"]
   spec.email         = ["2xijok@gmail.com"]
 
   spec.summary       = "Ruby bindings for lh3/cgranges"
   spec.description   = "Genomic interval overlap queries"
-  spec.homepage      = "https://github.com/ruby-on-bioc/bio-granges"
+  spec.homepage      = "https://github.com/ruby-on-bioc/bio-cgranges"
   spec.license       = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject do |f|
@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
     end
   end
   spec.require_paths = ["lib"]
-  spec.extensions    = ["ext/bio/granges/extconf.rb"]
+  spec.extensions    = ["ext/bio/cgranges/extconf.rb"]
 end
