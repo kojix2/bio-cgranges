@@ -167,6 +167,73 @@ cgranges_index(VALUE self)
   return self;
 }
 
+cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  int32_t c_start = 0;
+  int32_t c_end   = 0;
+  int32_t c_label = 0;
+
+  VALUE rb_start, rb_end, rb_label;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
+  {
+    rb_raise(rb_eRuntimeError, "CGRanges not indexed");
+    return Qnil;
+  }
+
+  if (rb_ctg != Qnil)
+  {
+    ctg = StringValueCStr(rb_ctg);
+  }
+
+  if (rb_st != Qnil)
+  {
+    st = NUM2INT32(rb_st);
+  }
+
+  if (rb_en != Qnil)
+  {
+    en = NUM2INT32(rb_en);
+  }
+
+  n = cr_overlap(cr, ctg, st, en, &b, &m_b);
+
+  if (n < 0)
+  {
+    rb_raise(rb_eRuntimeError, "Error finding overlaps");
+  } else if (n == 0)
+  {
+    return Qnil;
+  }
+
+  VALUE result = rb_ary_new();
+
+  for (int64_t i = 0; i < n; i++)
+  {
+    c_start = cr_start(cr, b[i]);
+    c_end   = cr_end(cr, b[i]);
+    c_label = cr_label(cr, b[i]);
+
+    VALUE rb_intv = rb_ary_new3(
+      4, 
+      INT32_2NUM(c_start), INT32_2NUM(rb_start),
+      INT32_2NUM(rb_end), INT32_2NUM(rb_label)
+    );
+    rb_ary_push(result, rb_intv);
+  }
+
+  return Qnil;
+}
+
 void Init_cgranges(void)
 {
   rb_Bio = rb_define_module("Bio");
@@ -177,6 +244,6 @@ void Init_cgranges(void)
   rb_define_method(rb_CGRanges, "initialize", cgranges_init, 0);
   rb_define_method(rb_CGRanges, "add", cgranges_add, 4);
   rb_define_method(rb_CGRanges, "index", cgranges_index, 0);
-  // rb_define_method(rb_CGRanges, "overlap", cgranges_overlap, 4);
+  rb_define_method(rb_CGRanges, "overlap", cgranges_overlap, 3);
   // rb_define_method(rb_CGRanges, "coverage", cgranges_coverage, 4);
 }

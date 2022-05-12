@@ -28,4 +28,16 @@ class CGRangesTest < Test::Unit::TestCase
       cgranges.index
     end
   end
+
+  def test_overlap
+    cgranges = Bio::CGRanges.new
+    r = nil
+    assert_nothing_raised do
+      cgranges.add("chr1", 10, 20, 0)
+      cgranges.add("chr1", 15, 25, 1)
+      cgranges.index
+      r = cgranges.overlap("chr1", 12, 16)
+    end
+    p r
+  end
 end

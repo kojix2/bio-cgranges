@@ -36,3 +36,9 @@ task default: %i[
   test
   rubocop
 ]
+
+task cleanall: %i[
+  clobber
+  remove_object_file
+  clean
+]
