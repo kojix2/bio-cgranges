@@ -146,7 +146,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#add-instance_method" title="#add (instance method)">#<strong>add</strong>  &#x21d2; Object </a>
+      <a href="#add-instance_method" title="#add (instance method)">#<strong>add</strong>(rb_ctg, rb_st, rb_en, rb_label)  &#x21d2; Object </a>
     
 
     
@@ -214,7 +214,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#overlap-instance_method" title="#overlap (instance method)">#<strong>overlap</strong>  &#x21d2; Object </a>
+      <a href="#overlap-instance_method" title="#overlap (instance method)">#<strong>overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
     
 
     
@@ -297,13 +297,117 @@ cgranges_init(VALUE self)
       <div class="method_details first">
   <h3 class="signature first" id="add-instance_method">
   
-    #<strong>add</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>add</strong>(rb_ctg, rb_st, rb_en, rb_label)  &#x21d2; <tt>Object</tt> 
   
 
   
 
   
-</h3>
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 108</span>
+
+static VALUE
+cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
+{
+  cgranges_t *cr = get_cganges(self);
+  cr_intv_t *intv = NULL;
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+  int32_t label = 0;
+
+  if (RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  {
+    rb_raise(rb_eRuntimeError, &quot;Cannot add to an indexed CGRanges&quot;);
+    return Qnil;
+  }
+
+  if (rb_ctg != Qnil)
+  {
+    ctg = StringValueCStr(rb_ctg);
+  }
+
+  if (rb_st != Qnil)
+  {
+    st = NUM2INT32(rb_st);
+  }
+
+  if (rb_en != Qnil)
+  {
+    en = NUM2INT32(rb_en);
+  }
+
+  if (rb_label != Qnil)
+  {
+    label = NUM2INT32(rb_label);
+  }
+
+  intv = cr_add(cr, ctg, st, en, label);
+
+  if (!intv)
+  {
+    rb_raise(rb_eRuntimeError, &quot;Error adding to CGRanges&quot;);
+    return Qnil;
+  }
+
+  return self;
+}</pre>
+    </td>
+  </tr>
+</table>
 </div>
     
       <div class="method_details ">
@@ -315,19 +419,167 @@ cgranges_init(VALUE self)
   
 
   
-</h3>
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 155</span>
+
+static VALUE
+cgranges_index(VALUE self)
+{
+  if(RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  {
+    rb_raise(rb_eRuntimeError, &quot;CGRanges already indexed&quot;);
+    return Qnil;
+  }
+
+  cgranges_t *cr = get_cganges(self);
+  cr_index(cr);
+  
+  rb_ivar_set(self, rb_intern(&quot;@indexed&quot;), Qtrue);
+
+  return self;
+}</pre>
+    </td>
+  </tr>
+</table>
 </div>
     
       <div class="method_details ">
   <h3 class="signature " id="overlap-instance_method">
   
-    #<strong>overlap</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
   
 
   
 
   
-</h3>
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 172</span>
+
+static VALUE
+cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  VALUE rb_start, rb_end, rb_label;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  {
+    rb_raise(rb_eRuntimeError, &quot;CGRanges not indexed&quot;);
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+  
+  n = cr_overlap(cr, ctg, st, en, &amp;b, &amp;m_b);
+
+  if (n &lt; 0)
+  {
+    rb_raise(rb_eRuntimeError, &quot;Error finding overlaps&quot;);
+  } else if (n == 0)
+  {
+    return Qnil;
+  }
+
+  VALUE result = rb_ary_new();
+
+  for (int64_t i = 0; i &lt; n; i++)
+  {
+    VALUE rb_intv = rb_ary_new3(
+      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
+    );
+    rb_ary_push(result, rb_intv);
+  }
+
+  return result;
+}</pre>
+    </td>
+  </tr>
+</table>
 </div>
     
   </div>
@@ -335,7 +587,7 @@ cgranges_init(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu May 12 07:34:00 2022 by
+  Generated on Thu May 12 10:27:24 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
