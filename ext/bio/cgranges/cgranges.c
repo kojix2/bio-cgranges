@@ -62,7 +62,7 @@ static const rb_data_type_t cgranges_type = {
 static void
 cgranges_free(void *ptr)
 {
-  if(!ptr)
+  if(ptr)
   {
     cr_destroy(ptr);
   }
@@ -105,6 +105,7 @@ cgranges_init(VALUE self)
   return self;
 }
 
+static VALUE
 cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 {
   cgranges_t *cr = get_cganges(self);
@@ -151,6 +152,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
   return self;
 }
 
+static VALUE
 cgranges_index(VALUE self)
 {
   if(RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
@@ -167,6 +169,7 @@ cgranges_index(VALUE self)
   return self;
 }
 
+static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
   cgranges_t *cr = get_cganges(self);
@@ -178,10 +181,6 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   int64_t m_b = 0;
   int64_t n = 0;
 
-  int32_t c_start = 0;
-  int32_t c_end   = 0;
-  int32_t c_label = 0;
-
   VALUE rb_start, rb_end, rb_label;
 
   if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
@@ -190,21 +189,10 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
     return Qnil;
   }
 
-  if (rb_ctg != Qnil)
-  {
-    ctg = StringValueCStr(rb_ctg);
-  }
-
-  if (rb_st != Qnil)
-  {
-    st = NUM2INT32(rb_st);
-  }
-
-  if (rb_en != Qnil)
-  {
-    en = NUM2INT32(rb_en);
-  }
-
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+  
   n = cr_overlap(cr, ctg, st, en, &b, &m_b);
 
   if (n < 0)
@@ -219,19 +207,13 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   for (int64_t i = 0; i < n; i++)
   {
-    c_start = cr_start(cr, b[i]);
-    c_end   = cr_end(cr, b[i]);
-    c_label = cr_label(cr, b[i]);
-
     VALUE rb_intv = rb_ary_new3(
-      4, 
-      INT32_2NUM(c_start), INT32_2NUM(rb_start),
-      INT32_2NUM(rb_end), INT32_2NUM(rb_label)
+      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
     );
     rb_ary_push(result, rb_intv);
   }
 
-  return Qnil;
+  return result;
 }
 
 void Init_cgranges(void)

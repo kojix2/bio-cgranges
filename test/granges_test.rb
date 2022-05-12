@@ -35,6 +35,10 @@ class CGRangesTest < Test::Unit::TestCase
     assert_nothing_raised do
       cgranges.add("chr1", 10, 20, 0)
       cgranges.add("chr1", 15, 25, 1)
+      cgranges.add("chr1", 20, 30, 2)
+      cgranges.add("chr1", 5,  35, 3)
+      cgranges.add("chr2", 10, 20, 0)
+      cgranges.add("chr2", 15, 25, 1)
       cgranges.index
       r = cgranges.overlap("chr1", 12, 16)
     end
