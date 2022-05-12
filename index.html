@@ -62,13 +62,7 @@
 
 <p><a href="https://badge.fury.io/rb/bio-cgranges"><img src="https://badge.fury.io/rb/bio-cgranges.svg"></a> <a href="https://github.com/ruby-on-bioc/bio-cgranges/actions/workflows/ci.yml"><img src="https://github.com/ruby-on-bioc/bio-cgranges/actions/workflows/ci.yml/badge.svg"></a> <a href="https://rubydoc.info/gems/bio-cgranges"><img src="https://img.shields.io/badge/docs-stable-blue.svg"></a></p>
 
-<p>Ruby bindings to <a href="https://github.com/lh3/cgranges">lh3/cranges</a>.</p>
-
-<blockquote>
-<p>cgranges is a small C library for genomic interval overlap queries:</p>
-
-<p>given a genomic region r and a set of regions R, finding all regions in R that overlaps r.</p>
-</blockquote>
+<p>Ruby bindings to <a href="https://github.com/dpryan79/lib2bit">lib2bit</a> / <a href="https://github.com/deeptools/py2bit">py2bit</a>.</p>
 
 <h2 id="label-Installation">Installation</h2>
 
@@ -76,18 +70,6 @@
 </code></pre>
 
 <h2 id="label-Usage">Usage</h2>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bio/cgranges</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/CGRanges.html" title="Bio::CGRanges (class)">CGRanges</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/CGRanges.html#initialize-instance_method" title="Bio::CGRanges#initialize (method)">new</a></span></span>
-<span class='id identifier rubyid_g'>g</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>0</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_g'>g</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>15</span><span class='comma'>,</span> <span class='int'>25</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_g'>g</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='rparen'>)</span>
-
-<span class='id identifier rubyid_g'>g</span><span class='period'>.</span><span class='id identifier rubyid_overlap'>overlap</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>16</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_g'>g</span><span class='op'>|</span>
-  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_r'>r</span>
-<span class='kw'>end</span>
-</code></pre>
 
 <h2 id="label-Development">Development</h2>
 
@@ -104,7 +86,7 @@ If so, please feel free to contact us @kojix2.
 </div></div>
 
       <div id="footer">
-  Generated on Thu May 12 05:49:42 2022 by
+  Generated on Thu May 12 07:34:00 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
