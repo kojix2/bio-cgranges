@@ -14,11 +14,16 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
 
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    `git ls-files -z`.split("\x0").reject do |f|
-      (f == __FILE__) || f.match(%r{\A(?:(?:test|spec|features)/|\.(?:git|travis|circleci)|appveyor)})
-    end
-  end
+  spec.files         = Dir[
+                         "*.{txt,md}", "Rakefile", "lib/**/*.rb",
+                         "ext/bio/cgranges/*.{c,h}",
+                         "ext/bio/cgranges/extconf.rb",
+                         "ext/bio/cgranges/cgranges/LICENSE.txt",
+                         "ext/bio/cgranges/cgranges/README.md",
+                         "ext/bio/cgranges/cgranges/cgranges.{c,h}",
+                         "ext/bio/cgranges/cgranges/khash.h",
+                        ]
+
   spec.require_paths = ["lib"]
   spec.extensions    = ["ext/bio/cgranges/extconf.rb"]
 end
