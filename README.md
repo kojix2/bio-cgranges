@@ -4,7 +4,9 @@
 [![test](https://github.com/ruby-on-bioc/bio-cgranges/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/bio-cgranges/actions/workflows/ci.yml)
 [![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/bio-cgranges)
 
-Ruby bindings to [lib2bit](https://github.com/dpryan79/lib2bit) / [py2bit](https://github.com/deeptools/py2bit).
+Ruby bindings to [lh3/cgranges](https://github.com/lh3/cgranges).
+
+> cgranges is a small C library for genomic interval overlap queries
 
 ## Installation
 
@@ -13,6 +15,18 @@ gem install bio-cgranges
 ```
 
 ## Usage
+
+```ruby
+cgranges.add("chr1", 10, 20, 0) # contig, start, end, label
+        .add("chr1", 15, 25, 1)
+        .add("chr1", 20, 30, 2)
+        .add("chr1", 5,  35, 3)
+        .add("chr2", 10, 20, 0)
+        .add("chr2", 15, 25, 1)
+        .index
+
+p cgranges.overlap("chr1", 12, 16)
+```
 
 ## Development
 
