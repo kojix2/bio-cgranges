@@ -198,6 +198,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   if (n < 0)
   {
     rb_raise(rb_eRuntimeError, "Error finding overlaps");
+    return Qnil;
   }
 
   VALUE result = rb_ary_new2(n);
@@ -211,6 +212,39 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   }
 
   return result;
+}
+
+static VALUE
+cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
+  {
+    rb_raise(rb_eNoIndexError, "CGRanges not indexed");
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+  
+  n = cr_overlap(cr, ctg, st, en, &b, &m_b);
+
+  if (n < 0)
+  {
+    rb_raise(rb_eRuntimeError, "Error finding overlaps");
+    return Qnil;
+  }
+
+  return INT64_2NUM(n);
 }
 
 static VALUE
@@ -240,6 +274,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   if (n < 0)
   {
     rb_raise(rb_eRuntimeError, "Error finding contained");
+    return Qnil;
   }
 
   VALUE result = rb_ary_new2(n);
@@ -255,6 +290,39 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   return result;
 }
 
+static VALUE
+cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
+  {
+    rb_raise(rb_eNoIndexError, "CGRanges not indexed");
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+  
+  n = cr_contain(cr, ctg, st, en, &b, &m_b);
+
+  if (n < 0)
+  {
+    rb_raise(rb_eRuntimeError, "Error finding contained");
+    return Qnil;
+  }
+
+  return INT64_2NUM(n);
+}
+
 void Init_cgranges(void)
 {
   rb_Bio = rb_define_module("Bio");
@@ -268,6 +336,7 @@ void Init_cgranges(void)
   rb_define_method(rb_CGRanges, "add", cgranges_add, 4);
   rb_define_method(rb_CGRanges, "index", cgranges_index, 0);
   rb_define_method(rb_CGRanges, "overlap", cgranges_overlap, 3);
+  rb_define_method(rb_CGRanges, "count_overlap", cgranges_count_overlap, 3);
   rb_define_method(rb_CGRanges, "contain", cgranges_contain, 3);
-  // rb_define_method(rb_CGRanges, "coverage", cgranges_coverage, 4);
+  rb_define_method(rb_CGRanges, "count_contain", cgranges_count_contain, 3);
 }

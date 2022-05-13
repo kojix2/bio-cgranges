@@ -130,4 +130,32 @@ class CGRangesTest < Test::Unit::TestCase
       cgranges.contain("chr1", 12, 22)
     end
   end
+
+  def test_count_overlap
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    cgranges.add("chr1", 30, 40, 2)
+    cgranges.add("chr1", 10, 25, 3)
+    cgranges.add("chr1", 15, 20, 4)
+    cgranges.add("chr2", 10, 20, 5)
+    cgranges.index
+    act = cgranges.count_overlap("chr1", 12, 22)
+    exp = 4
+    assert_equal exp, act
+  end
+
+  def test_count_contain
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    cgranges.add("chr1", 20, 30, 2)
+    cgranges.add("chr1", 10, 25, 3)
+    cgranges.add("chr1", 15, 20, 4)
+    cgranges.add("chr2", 10, 20, 5)
+    cgranges.index
+    act = cgranges.count_contain("chr1", 12, 22)
+    exp = 1
+    assert_equal exp, act
+  end
 end
