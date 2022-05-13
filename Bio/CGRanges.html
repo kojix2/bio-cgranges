@@ -457,6 +457,11 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       <pre class="lines">
 
 
+216
+217
+218
+219
+220
 221
 222
 223
@@ -492,20 +497,10 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 253
 254
 255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266</pre>
+256</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 221</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 216</span>
 
 static VALUE
 cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -518,8 +513,6 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   int64_t *b = NULL;
   int64_t m_b = 0;
   int64_t n = 0;
-
-  VALUE rb_start, rb_end, rb_label;
 
   if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
   {
@@ -536,9 +529,6 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   if (n &lt; 0)
   {
     rb_raise(rb_eRuntimeError, &quot;Error finding contained&quot;);
-  } else if (n == 0)
-  {
-    return Qnil;
   }
 
   VALUE result = rb_ary_new2(n);
@@ -669,12 +659,7 @@ cgranges_index(VALUE self)
 211
 212
 213
-214
-215
-216
-217
-218
-219</pre>
+214</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 174</span>
@@ -691,8 +676,6 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   int64_t m_b = 0;
   int64_t n = 0;
 
-  VALUE rb_start, rb_end, rb_label;
-
   if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
   {
     rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
@@ -708,9 +691,6 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   if (n &lt; 0)
   {
     rb_raise(rb_eRuntimeError, &quot;Error finding overlaps&quot;);
-  } else if (n == 0)
-  {
-    return Qnil;
   }
 
   VALUE result = rb_ary_new2(n);
@@ -735,7 +715,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Fri May 13 03:04:34 2022 by
+  Generated on Fri May 13 03:14:40 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
