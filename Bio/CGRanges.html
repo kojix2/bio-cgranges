@@ -112,7 +112,17 @@
 <div class="tags">
   
 
-</div>
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="CGRanges/IndexedError.html" title="Bio::CGRanges::IndexedError (class)">IndexedError</a></span>, <span class='object_link'><a href="CGRanges/NoIndexError.html" title="Bio::CGRanges::NoIndexError (class)">NoIndexError</a></span>
+    
+  
+</p>
+
   
     <h2>
       Constant Summary
@@ -147,6 +157,28 @@
   <span class="summary_signature">
     
       <a href="#add-instance_method" title="#add (instance method)">#<strong>add</strong>(rb_ctg, rb_st, rb_en, rb_label)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#contain-instance_method" title="#contain (instance method)">#<strong>contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
     
 
     
@@ -254,8 +286,6 @@
       <pre class="lines">
 
 
-95
-96
 97
 98
 99
@@ -265,10 +295,12 @@
 103
 104
 105
-106</pre>
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 95</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 97</span>
 
 static VALUE
 cgranges_init(VALUE self)
@@ -309,8 +341,6 @@ cgranges_init(VALUE self)
       <pre class="lines">
 
 
-108
-109
 110
 111
 112
@@ -354,10 +384,12 @@ cgranges_init(VALUE self)
 150
 151
 152
-153</pre>
+153
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 108</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 110</span>
 
 static VALUE
 cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
@@ -371,7 +403,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 
   if (RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
   {
-    rb_raise(rb_eRuntimeError, &quot;Cannot add to an indexed CGRanges&quot;);
+    rb_raise(rb_eIndexedError, &quot;Cannot add intervals to an indexed CGRanges&quot;);
     return Qnil;
   }
 
@@ -399,11 +431,127 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 
   if (!intv)
   {
-    rb_raise(rb_eRuntimeError, &quot;Error adding to CGRanges&quot;);
+    rb_raise(rb_eRuntimeError, &quot;Error adding interval&quot;);
     return Qnil;
   }
 
   return self;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="contain-instance_method">
+  
+    #<strong>contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 221</span>
+
+static VALUE
+cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  VALUE rb_start, rb_end, rb_label;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  {
+    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+  
+  n = cr_contain(cr, ctg, st, en, &amp;b, &amp;m_b);
+
+  if (n &lt; 0)
+  {
+    rb_raise(rb_eRuntimeError, &quot;Error finding contained&quot;);
+  } else if (n == 0)
+  {
+    return Qnil;
+  }
+
+  VALUE result = rb_ary_new2(n);
+
+  for (int64_t i = 0; i &lt; n; i++)
+  {
+    VALUE rb_intv = rb_ary_new3(
+      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
+    );
+    rb_ary_push(result, rb_intv);
+  }
+
+  return result;
 }</pre>
     </td>
   </tr>
@@ -425,8 +573,6 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       <pre class="lines">
 
 
-155
-156
 157
 158
 159
@@ -440,17 +586,19 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 167
 168
 169
-170</pre>
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 155</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 157</span>
 
 static VALUE
 cgranges_index(VALUE self)
 {
   if(RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
   {
-    rb_raise(rb_eRuntimeError, &quot;CGRanges already indexed&quot;);
+    rb_raise(rb_eIndexedError, &quot;CGRanges already indexed&quot;);
     return Qnil;
   }
 
@@ -481,8 +629,6 @@ cgranges_index(VALUE self)
       <pre class="lines">
 
 
-172
-173
 174
 175
 176
@@ -526,10 +672,12 @@ cgranges_index(VALUE self)
 214
 215
 216
-217</pre>
+217
+218
+219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 172</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 174</span>
 
 static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -547,7 +695,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
   {
-    rb_raise(rb_eRuntimeError, &quot;CGRanges not indexed&quot;);
+    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
     return Qnil;
   }
 
@@ -565,7 +713,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
     return Qnil;
   }
 
-  VALUE result = rb_ary_new();
+  VALUE result = rb_ary_new2(n);
 
   for (int64_t i = 0; i &lt; n; i++)
   {
@@ -587,7 +735,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Fri May 13 01:14:25 2022 by
+  Generated on Fri May 13 03:01:25 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
