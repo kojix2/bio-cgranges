@@ -183,8 +183,6 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   int64_t m_b = 0;
   int64_t n = 0;
 
-  VALUE rb_start, rb_end, rb_label;
-
   if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
     rb_raise(rb_eNoIndexError, "CGRanges not indexed");
@@ -229,8 +227,6 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   int64_t *b = NULL;
   int64_t m_b = 0;
   int64_t n = 0;
-
-  VALUE rb_start, rb_end, rb_label;
 
   if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
