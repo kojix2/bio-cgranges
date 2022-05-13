@@ -415,22 +415,7 @@ cgranges_init(VALUE self)
 137
 138
 139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155</pre>
+140</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 110</span>
@@ -451,25 +436,10 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
     return Qnil;
   }
 
-  if (rb_ctg != Qnil)
-  {
-    ctg = StringValueCStr(rb_ctg);
-  }
-
-  if (rb_st != Qnil)
-  {
-    st = NUM2INT32(rb_st);
-  }
-
-  if (rb_en != Qnil)
-  {
-    en = NUM2INT32(rb_en);
-  }
-
-  if (rb_label != Qnil)
-  {
-    label = NUM2INT32(rb_label);
-  }
+  ctg   = StringValueCStr(rb_ctg);
+  st    = NUM2INT32(rb_st);
+  en    = NUM2INT32(rb_en);
+  label = NUM2INT32(rb_label);
 
   intv = cr_add(cr, ctg, st, en, label);
 
@@ -501,6 +471,21 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       <pre class="lines">
 
 
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
 250
 251
 252
@@ -527,25 +512,10 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 273
 274
 275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291</pre>
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 250</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 235</span>
 
 static VALUE
 cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -609,6 +579,21 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
 293
 294
 295
@@ -625,25 +610,10 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 306
 307
 308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324</pre>
+309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 293</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 278</span>
 
 static VALUE
 cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -697,6 +667,21 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
 217
 218
 219
@@ -713,25 +698,10 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 230
 231
 232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248</pre>
+233</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 217</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 202</span>
 
 static VALUE
 cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -785,25 +755,25 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172</pre>
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 157</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 142</span>
 
 static VALUE
 cgranges_index(VALUE self)
@@ -841,6 +811,21 @@ cgranges_index(VALUE self)
       <pre class="lines">
 
 
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
 174
 175
 176
@@ -867,25 +852,10 @@ cgranges_index(VALUE self)
 197
 198
 199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215</pre>
+200</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 174</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 159</span>
 
 static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -939,7 +909,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Fri May 13 06:19:28 2022 by
+  Generated on Fri May 13 06:25:05 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
