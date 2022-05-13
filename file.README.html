@@ -75,15 +75,38 @@
 
 <h2 id="label-Usage">Usage</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_cgranges'>cgranges</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>0</span><span class='rparen'>)</span> <span class='comment'># contig, start, end, label
-</span>        <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>15</span><span class='comma'>,</span> <span class='int'>25</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
-        <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>30</span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
-        <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>5</span><span class='comma'>,</span>  <span class='int'>35</span><span class='comma'>,</span> <span class='int'>3</span><span class='rparen'>)</span>
-        <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>0</span><span class='rparen'>)</span>
-        <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>15</span><span class='comma'>,</span> <span class='int'>25</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
-        <span class='period'>.</span><span class='id identifier rubyid_index'>index</span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bio/cgranges</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_cgranges'>cgranges</span><span class='period'>.</span><span class='id identifier rubyid_overlap'>overlap</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>16</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_granges'>granges</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/CGRanges.html" title="Bio::CGRanges (class)">CGRanges</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/CGRanges.html#initialize-instance_method" title="Bio::CGRanges#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>0</span><span class='rparen'>)</span>
+       <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>15</span><span class='comma'>,</span> <span class='int'>25</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
+       <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>30</span><span class='comma'>,</span> <span class='int'>40</span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
+       <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>25</span><span class='comma'>,</span> <span class='int'>3</span><span class='rparen'>)</span>
+       <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>15</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>4</span><span class='rparen'>)</span>
+       <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>5</span><span class='rparen'>)</span>
+       <span class='period'>.</span><span class='id identifier rubyid_index'>index</span>
+       
+<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_overlap'>overlap</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>22</span><span class='rparen'>)</span>
+<span class='comment'># [[&quot;chr1&quot;, 10, 20, 0],
+</span><span class='comment'>#  [&quot;chr1&quot;, 10, 25, 3],
+</span><span class='comment'>#  [&quot;chr1&quot;, 15, 25, 1],
+</span><span class='comment'>#  [&quot;chr1&quot;, 15, 20, 4]]
+</span>
+<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_contain'>contain</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>22</span><span class='rparen'>)</span>
+<span class='comment'># [[&quot;chr1&quot;, 15, 20, 4]]
+</span></code></pre>
+
+<pre class="code ruby"><code class="ruby">0.........5.........10........15........20........25........30........35........40
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+                     0-0-0-0-0-0-0-0-0-0
+                               1-1-1-1-1-1-1-1-1-1
+                                                             2-2-2-2-2-2-2-2-2-2
+                     3-3-3-3-3-3-3-3-3-3-3-3-3-3-3
+                               4-4-4-4-4
+           5-5-5-5-5
+                         Q-Q-Q-Q-Q-Q-Q-Q-Q-Q
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+0.........5.........10........15........20........25........30........35........40
 </code></pre>
 
 <h2 id="label-Development">Development</h2>
@@ -101,7 +124,7 @@ If so, please feel free to contact us @kojix2.
 </div></div>
 
       <div id="footer">
-  Generated on Fri May 13 03:35:06 2022 by
+  Generated on Fri May 13 05:51:43 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
