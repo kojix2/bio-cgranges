@@ -198,9 +198,6 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   if (n < 0)
   {
     rb_raise(rb_eRuntimeError, "Error finding overlaps");
-  } else if (n == 0)
-  {
-    return Qnil;
   }
 
   VALUE result = rb_ary_new2(n);
@@ -243,9 +240,6 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   if (n < 0)
   {
     rb_raise(rb_eRuntimeError, "Error finding contained");
-  } else if (n == 0)
-  {
-    return Qnil;
   }
 
   VALUE result = rb_ary_new2(n);
