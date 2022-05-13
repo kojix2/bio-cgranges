@@ -19,7 +19,7 @@ class CGRangesTest < Test::Unit::TestCase
       r << cgranges.add("chr1", 10, 20, 0)
       r << cgranges.add("chr2", 15, 25, 1)
     end
-    assert_true r.all? { |x| x.is_a?(Bio::CGRanges) }
+    assert_true(r.all? { |x| x.is_a?(Bio::CGRanges) })
   end
 
   def test_add_indexed_cgranges
