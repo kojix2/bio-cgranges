@@ -43,6 +43,8 @@
 
 VALUE rb_Bio;
 VALUE rb_CGRanges;
+VALUE rb_eNoIndexError;
+VALUE rb_eIndexedError;
 
 static void cgranges_free(void *ptr);
 static size_t cgranges_memsize(const void *ptr);
@@ -117,7 +119,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 
   if (RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
-    rb_raise(rb_eRuntimeError, "Cannot add to an indexed CGRanges");
+    rb_raise(rb_eIndexedError, "Cannot add intervals to an indexed CGRanges");
     return Qnil;
   }
 
@@ -145,7 +147,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 
   if (!intv)
   {
-    rb_raise(rb_eRuntimeError, "Error adding to CGRanges");
+    rb_raise(rb_eRuntimeError, "Error adding interval");
     return Qnil;
   }
 
@@ -157,7 +159,7 @@ cgranges_index(VALUE self)
 {
   if(RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
-    rb_raise(rb_eRuntimeError, "CGRanges already indexed");
+    rb_raise(rb_eIndexedError, "CGRanges already indexed");
     return Qnil;
   }
 
@@ -185,7 +187,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
-    rb_raise(rb_eRuntimeError, "CGRanges not indexed");
+    rb_raise(rb_eNoIndexError, "CGRanges not indexed");
     return Qnil;
   }
 
@@ -203,7 +205,54 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
     return Qnil;
   }
 
-  VALUE result = rb_ary_new();
+  VALUE result = rb_ary_new2(n);
+
+  for (int64_t i = 0; i < n; i++)
+  {
+    VALUE rb_intv = rb_ary_new3(
+      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
+    );
+    rb_ary_push(result, rb_intv);
+  }
+
+  return result;
+}
+
+static VALUE
+cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  VALUE rb_start, rb_end, rb_label;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
+  {
+    rb_raise(rb_eNoIndexError, "CGRanges not indexed");
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+  
+  n = cr_contain(cr, ctg, st, en, &b, &m_b);
+
+  if (n < 0)
+  {
+    rb_raise(rb_eRuntimeError, "Error finding contained");
+  } else if (n == 0)
+  {
+    return Qnil;
+  }
+
+  VALUE result = rb_ary_new2(n);
 
   for (int64_t i = 0; i < n; i++)
   {
@@ -220,6 +269,8 @@ void Init_cgranges(void)
 {
   rb_Bio = rb_define_module("Bio");
   rb_CGRanges = rb_define_class_under(rb_Bio, "CGRanges", rb_cObject);
+  rb_eNoIndexError = rb_define_class_under(rb_CGRanges, "NoIndexError", rb_eStandardError);
+  rb_eIndexedError = rb_define_class_under(rb_CGRanges, "IndexedError", rb_eStandardError);
 
   rb_define_alloc_func(rb_CGRanges, cgranges_allocate);
 
@@ -227,5 +278,6 @@ void Init_cgranges(void)
   rb_define_method(rb_CGRanges, "add", cgranges_add, 4);
   rb_define_method(rb_CGRanges, "index", cgranges_index, 0);
   rb_define_method(rb_CGRanges, "overlap", cgranges_overlap, 3);
+  rb_define_method(rb_CGRanges, "contain", cgranges_contain, 3);
   // rb_define_method(rb_CGRanges, "coverage", cgranges_coverage, 4);
 }
