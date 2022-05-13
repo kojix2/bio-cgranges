@@ -123,25 +123,10 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
     return Qnil;
   }
 
-  if (rb_ctg != Qnil)
-  {
-    ctg = StringValueCStr(rb_ctg);
-  }
-
-  if (rb_st != Qnil)
-  {
-    st = NUM2INT32(rb_st);
-  }
-
-  if (rb_en != Qnil)
-  {
-    en = NUM2INT32(rb_en);
-  }
-
-  if (rb_label != Qnil)
-  {
-    label = NUM2INT32(rb_label);
-  }
+  ctg   = StringValueCStr(rb_ctg);
+  st    = NUM2INT32(rb_st);
+  en    = NUM2INT32(rb_en);
+  label = NUM2INT32(rb_label);
 
   intv = cr_add(cr, ctg, st, en, label);
 
