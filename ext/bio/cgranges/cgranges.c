@@ -174,11 +174,11 @@ cgranges_index(VALUE self)
 }
 
 /* Overlap query.
-  * @param [String] contig The contig name
-  * @param [Fixnum] start The start position of the interval.
-  * @param [Fixnum] end The end position of the interval.
-  * @return [Array] An array of [contig, start, end, label] arrays.
-  */
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @return [Array] An array of [contig, start, end, label] arrays.
+ */
 
 static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -224,11 +224,11 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 }
 
 /* Get the number of overlapping intervals.
-  * @param [String] contig The contig name
-  * @param [Fixnum] start The start position of the interval.
-  * @param [Fixnum] end The end position of the interval.
-  * @return [Fixnum] The number of overlapping intervals.
-  */
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @return [Fixnum] The number of overlapping intervals.
+ */
 
 static VALUE
 cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -359,7 +359,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
  * @param [String] contig The contig name
  * @param [Fixnum] start The start position of the interval.
  * @param [Fixnum] end The end position of the interval.
- * @return [Array] The breadth of coverage and the number of intervals. 
+ * @return [Array] The breadth of coverage and the number of intervals.
  */
 
 static VALUE
