@@ -179,6 +179,13 @@ class CGRangesTest < Test::Unit::TestCase
     assert_equal exp, act
   end
 
+  def test_coverage3
+    cranges = prepare_crange.index
+    act = cranges.coverage("chr1", 3, 43)
+    exp = [30, 6]
+    assert_equal exp, act
+  end
+
   def test_coverage_without_index
     cgranges = prepare_crange
     assert_raises(Bio::CGRanges::NoIndexError) do
