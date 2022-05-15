@@ -300,7 +300,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Object </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Bio::CGRanges </a>
     
 
     
@@ -316,7 +316,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new cgranges object.</p>
+</div></span>
   
 </li>
 
@@ -354,33 +356,44 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Bio::CGRanges (class)">Bio::CGRanges</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new cgranges object</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
 102
 103
 104
 105
 106
 107
-108</pre>
+108
+109
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 97</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 102</span>
 
 static VALUE
 cgranges_init(VALUE self)
@@ -518,11 +531,6 @@ cgranges_init(VALUE self)
       <pre class="lines">
 
 
-118
-119
-120
-121
-122
 123
 124
 125
@@ -548,10 +556,15 @@ cgranges_init(VALUE self)
 145
 146
 147
-148</pre>
+148
+149
+150
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 118</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 123</span>
 
 static VALUE
 cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
@@ -685,11 +698,6 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       <pre class="lines">
 
 
-269
-270
-271
-272
-273
 274
 275
 276
@@ -726,10 +734,15 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 307
 308
 309
-310</pre>
+310
+311
+312
+313
+314
+315</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 269</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 274</span>
 
 static VALUE
 cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -874,11 +887,6 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
-319
-320
-321
-322
-323
 324
 325
 326
@@ -906,10 +914,15 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 348
 349
 350
-351</pre>
+351
+352
+353
+354
+355
+356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 319</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 324</span>
 
 static VALUE
 cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -1045,11 +1058,6 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
-228
-229
-230
-231
-232
 233
 234
 235
@@ -1077,10 +1085,15 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 257
 258
 259
-260</pre>
+260
+261
+262
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 228</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 233</span>
 
 static VALUE
 cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -1216,11 +1229,6 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
-360
-361
-362
-363
-364
 365
 366
 367
@@ -1267,10 +1275,15 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 408
 409
 410
-411</pre>
+411
+412
+413
+414
+415
+416</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 360</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 365</span>
 
 static VALUE
 cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -1373,11 +1386,6 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
-154
-155
-156
-157
-158
 159
 160
 161
@@ -1388,10 +1396,15 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 166
 167
 168
-169</pre>
+169
+170
+171
+172
+173
+174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 154</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 159</span>
 
 static VALUE
 cgranges_index(VALUE self)
@@ -1510,11 +1523,6 @@ cgranges_index(VALUE self)
       <pre class="lines">
 
 
-178
-179
-180
-181
-182
 183
 184
 185
@@ -1551,10 +1559,15 @@ cgranges_index(VALUE self)
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 178</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 183</span>
 
 static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -1608,7 +1621,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Sun May 15 06:49:20 2022 by
+  Generated on Sun May 15 06:53:48 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
