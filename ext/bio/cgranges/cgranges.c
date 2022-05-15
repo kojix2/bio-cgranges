@@ -64,7 +64,7 @@ static const rb_data_type_t cgranges_type = {
 static void
 cgranges_free(void *ptr)
 {
-  if(ptr)
+  if (ptr)
   {
     cr_destroy(ptr);
   }
@@ -123,9 +123,9 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
     return Qnil;
   }
 
-  ctg   = StringValueCStr(rb_ctg);
-  st    = NUM2INT32(rb_st);
-  en    = NUM2INT32(rb_en);
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
   label = NUM2INT32(rb_label);
 
   intv = cr_add(cr, ctg, st, en, label);
@@ -142,7 +142,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 static VALUE
 cgranges_index(VALUE self)
 {
-  if(RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
+  if (RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
   {
     rb_raise(rb_eIndexedError, "CGRanges already indexed");
     return Qnil;
@@ -150,7 +150,7 @@ cgranges_index(VALUE self)
 
   cgranges_t *cr = get_cganges(self);
   cr_index(cr);
-  
+
   rb_ivar_set(self, rb_intern("@indexed"), Qtrue);
 
   return self;
@@ -177,7 +177,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_overlap(cr, ctg, st, en, &b, &m_b);
 
   if (n < 0)
@@ -191,8 +191,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   for (int64_t i = 0; i < n; i++)
   {
     VALUE rb_intv = rb_ary_new3(
-      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
-    );
+        4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
 
@@ -220,7 +219,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_overlap(cr, ctg, st, en, &b, &m_b);
 
   if (n < 0)
@@ -253,7 +252,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_contain(cr, ctg, st, en, &b, &m_b);
 
   if (n < 0)
@@ -267,8 +266,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   for (int64_t i = 0; i < n; i++)
   {
     VALUE rb_intv = rb_ary_new3(
-      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
-    );
+        4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
 
@@ -296,7 +294,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_contain(cr, ctg, st, en, &b, &m_b);
 
   if (n < 0)
@@ -306,6 +304,58 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   }
 
   return INT64_2NUM(n);
+}
+
+static VALUE
+cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st1 = 0;
+  int32_t en1 = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+  int64_t cov = 0, cov_st = 0, cov_en = 0;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern("@indexed"))))
+  {
+    rb_raise(rb_eNoIndexError, "CGRanges not indexed");
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st1 = NUM2INT32(rb_st);
+  en1 = NUM2INT32(rb_en);
+
+  n = cr_overlap(cr, ctg, st1, en1, &b, &m_b);
+
+  if (n < 0)
+  {
+    rb_raise(rb_eRuntimeError, "Error finding overlaps");
+    return Qnil;
+  }
+
+  for (int64_t j = 0; j < n; j++)
+  {
+    cr_intv_t *r = &cr->r[b[j]];
+    int32_t st0 = cr_st(r), en0 = cr_en(r);
+    if (st0 < st1)
+      st0 = st1;
+    if (en0 > en1)
+      en0 = en1;
+    if (st0 > cov_en)
+    {
+      cov += cov_en - cov_st;
+      cov_st = st0, cov_en = en0;
+    }
+    else
+      cov_en = cov_en > en0 ? cov_en : en0;
+  }
+  cov += cov_en - cov_st;
+
+  return rb_ary_new3(2, INT64_2NUM(cov), INT64_2NUM(n));
 }
 
 void Init_cgranges(void)
@@ -324,4 +374,5 @@ void Init_cgranges(void)
   rb_define_method(rb_CGRanges, "count_overlap", cgranges_count_overlap, 3);
   rb_define_method(rb_CGRanges, "contain", cgranges_contain, 3);
   rb_define_method(rb_CGRanges, "count_contain", cgranges_count_contain, 3);
+  rb_define_method(rb_CGRanges, "coverage", cgranges_coverage, 3);
 }
