@@ -2,6 +2,17 @@
 
 require "test_helper"
 
+# 0.........5.........10........15........20........25........30........35........40
+# |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+#                      0-0-0-0-0-0-0-0-0-0
+#                                1-1-1-1-1-1-1-1-1-1
+#                                                              2-2-2-2-2-2-2-2-2-2
+#                      3-3-3-3-3-3-3-3-3-3-3-3-3-3-3
+#                                4-4-4-4-4
+#            5-5-5-5-5
+# |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+# 0.........5.........10........15........20........25........30........35........40
+
 class CGRangesTest < Test::Unit::TestCase
   def test_version
     assert_true Bio::CGRanges.const_defined?(:VERSION)
@@ -55,15 +66,19 @@ class CGRangesTest < Test::Unit::TestCase
     assert_raises(Bio::CGRanges::IndexedError) { cgranges.index }
   end
 
-  def prepare_crange
-    r = Bio::CGRanges.new
-    r.add("chr1", 10, 20, 0)
-     .add("chr1", 15, 25, 1)
-     .add("chr1", 30, 40, 2)
-     .add("chr1", 10, 25, 3)
-     .add("chr1", 15, 20, 4)
-     .add("chr1", 5, 10, 5)
-     .add("chr2", 10, 20, 6)
+  def prepare_crange(except: [])
+    cgranges = Bio::CGRanges.new
+    invs = [["chr1", 10, 20, 0],
+            ["chr1", 15, 25, 1],
+            ["chr1", 30, 40, 2],
+            ["chr1", 10, 25, 3],
+            ["chr1", 15, 20, 4],
+            ["chr1", 5, 10, 5],
+            ["chr2", 10, 20, 6]]
+    invs.each do |inv|
+      cgranges.add(*inv) unless except.include?(inv[3])
+    end
+    cgranges
   end
 
   def test_overlap
@@ -154,27 +169,15 @@ class CGRangesTest < Test::Unit::TestCase
   end
 
   def test_coverage_overlap1
-    cgranges = Bio::CGRanges.new
-    cgranges.add("chr1", 10, 20, 0)
-    cgranges.add("chr1", 30, 40, 2)
-    cgranges.add("chr1", 15, 20, 4)
-    cgranges.add("chr1", 5, 10, 5)
-    cgranges.add("chr2", 10, 20, 6)
-    cgranges.index
+    cgranges = prepare_crange(except: [1, 3]).index
     act = cgranges.coverage_overlap("chr1", 12, 22)
     exp = [8, 2]
     assert_equal exp, act
   end
 
   def test_coverage_overlap2
-    cgr = Bio::CGRanges.new
-    act = cgr.add("chr1", 15, 25, 1)
-             .add("chr1", 30, 40, 2)
-             .add("chr1", 15, 20, 4)
-             .add("chr1", 5, 10, 5)
-             .add("chr2", 10, 20, 6)
-             .index
-             .coverage_overlap("chr1", 12, 22)
+    cgranges = prepare_crange(except: [0, 3]).index
+    act = cgranges.coverage_overlap("chr1", 12, 22)
     exp = [7, 2]
     assert_equal exp, act
   end
@@ -234,6 +237,9 @@ class CGRangesTest < Test::Unit::TestCase
     exp = [5, 4]
     assert_equal exp, act
     act = cranges.coverage("chr1", 15, 20, mode: :contain)
+    exp = [5, 1]
+    assert_equal exp, act
+    act = cranges.coverage("chr1", 12, 22, mode: :contain)
     exp = [5, 1]
     assert_equal exp, act
   end
