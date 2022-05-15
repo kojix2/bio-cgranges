@@ -30,6 +30,22 @@ class CGRangesTest < Test::Unit::TestCase
     end
   end
 
+  def test_add_nil
+    cgranges = Bio::CGRanges.new
+    assert_raises(TypeError) do
+      cgranges.add(nil, 10, 20, 0)
+    end
+    assert_raises(TypeError) do
+      cgranges.add("chr1", nil, 20, 0)
+    end
+    assert_raises(TypeError) do
+      cgranges.add("chr1", 10, nil, 0)
+    end
+    assert_raises(TypeError) do
+      cgranges.add("chr1", 10, 20, nil)
+    end
+  end
+
   def test_index
     cgranges = Bio::CGRanges.new
     r = nil
@@ -93,6 +109,22 @@ class CGRangesTest < Test::Unit::TestCase
     end
   end
 
+  def test_overlap_nil
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    cgranges.index
+    assert_raises(TypeError) do
+      cgranges.overlap(nil, 12, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.overlap("chr1", nil, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.overlap("chr1", 12, nil)
+    end
+  end
+
   def test_contain
     cgranges = Bio::CGRanges.new
     cgranges.add("chr1", 10, 20, 0)
@@ -131,6 +163,22 @@ class CGRangesTest < Test::Unit::TestCase
     end
   end
 
+  def test_contain_nil
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    cgranges.index
+    assert_raises(TypeError) do
+      cgranges.contain(nil, 12, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.contain("chr1", nil, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.contain("chr1", 12, nil)
+    end
+  end
+
   def test_count_overlap
     cgranges = Bio::CGRanges.new
     cgranges.add("chr1", 10, 20, 0)
@@ -145,6 +193,46 @@ class CGRangesTest < Test::Unit::TestCase
     assert_equal exp, act
   end
 
+  def test_count_overlap_method_chain
+    granges = Bio::CGRanges.new
+    act = granges
+          .add("chr1", 10, 20, 0)
+          .add("chr1", 15, 25, 1)
+          .add("chr1", 30, 40, 2)
+          .add("chr1", 10, 25, 3)
+          .add("chr1", 15, 20, 4)
+          .add("chr2", 10, 20, 5)
+          .index
+          .count_overlap("chr1", 12, 22)
+    exp = 4
+    assert_equal exp, act
+  end
+
+  def test_count_overlap_without_index
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    assert_raises(Bio::CGRanges::NoIndexError) do
+      cgranges.count_overlap("chr1", 12, 22)
+    end
+  end
+
+  def test_count_overlap_nil
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    cgranges.index
+    assert_raises(TypeError) do
+      cgranges.count_overlap(nil, 12, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.count_overlap("chr1", nil, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.count_overlap("chr1", 12, nil)
+    end
+  end
+
   def test_count_contain
     cgranges = Bio::CGRanges.new
     cgranges.add("chr1", 10, 20, 0)
@@ -157,5 +245,45 @@ class CGRangesTest < Test::Unit::TestCase
     act = cgranges.count_contain("chr1", 12, 22)
     exp = 1
     assert_equal exp, act
+  end
+
+  def test_count_contain_method_chain
+    granges = Bio::CGRanges.new
+    act = granges
+          .add("chr1", 10, 20, 0)
+          .add("chr1", 15, 25, 1)
+          .add("chr1", 20, 30, 2)
+          .add("chr1", 10, 25, 3)
+          .add("chr1", 15, 20, 4)
+          .add("chr2", 10, 20, 5)
+          .index
+          .count_contain("chr1", 12, 22)
+    exp = 1
+    assert_equal exp, act
+  end
+
+  def test_count_contain_without_index
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    assert_raises(Bio::CGRanges::NoIndexError) do
+      cgranges.count_contain("chr1", 12, 22)
+    end
+  end
+
+  def test_count_contain_nil
+    cgranges = Bio::CGRanges.new
+    cgranges.add("chr1", 10, 20, 0)
+    cgranges.add("chr1", 15, 25, 1)
+    cgranges.index
+    assert_raises(TypeError) do
+      cgranges.count_contain(nil, 12, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.count_contain("chr1", nil, 22)
+    end
+    assert_raises(TypeError) do
+      cgranges.count_contain("chr1", 12, nil)
+    end
   end
 end
