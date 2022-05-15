@@ -156,7 +156,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#add-instance_method" title="#add (instance method)">#<strong>add</strong>(rb_ctg, rb_st, rb_en, rb_label)  &#x21d2; Object </a>
+      <a href="#add-instance_method" title="#add (instance method)">#<strong>add</strong>(rb_ctg, rb_st, rb_en, rb_label)  &#x21d2; Bio::CGRanges </a>
     
 
     
@@ -170,7 +170,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Add a genomic interval to the cgranges object.</p>
+</div></span>
   
 </li>
 
@@ -178,7 +180,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#contain-instance_method" title="#contain (instance method)">#<strong>contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
+      <a href="#contain-instance_method" title="#contain (instance method)">#<strong>contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Array </a>
     
 
     
@@ -192,7 +194,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Containment query.</p>
+</div></span>
   
 </li>
 
@@ -200,7 +204,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#count_contain-instance_method" title="#count_contain (instance method)">#<strong>count_contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
+      <a href="#count_contain-instance_method" title="#count_contain (instance method)">#<strong>count_contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Fixnum </a>
     
 
     
@@ -214,7 +218,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the number of containing intervals.</p>
+</div></span>
   
 </li>
 
@@ -222,7 +228,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#count_overlap-instance_method" title="#count_overlap (instance method)">#<strong>count_overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
+      <a href="#count_overlap-instance_method" title="#count_overlap (instance method)">#<strong>count_overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Fixnum </a>
     
 
     
@@ -236,7 +242,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the number of overlapping intervals.</p>
+</div></span>
   
 </li>
 
@@ -244,7 +252,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#coverage-instance_method" title="#coverage (instance method)">#<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
+      <a href="#coverage-instance_method" title="#coverage (instance method)">#<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Array </a>
     
 
     
@@ -258,7 +266,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Calculate breadth of coverage.</p>
+</div></span>
   
 </li>
 
@@ -266,7 +276,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Object </a>
+      <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Bio::CGRanges </a>
     
 
     
@@ -280,7 +290,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Index.</p>
+</div></span>
   
 </li>
 
@@ -312,7 +324,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#overlap-instance_method" title="#overlap (instance method)">#<strong>overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
+      <a href="#overlap-instance_method" title="#overlap (instance method)">#<strong>overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Array </a>
     
 
     
@@ -326,7 +338,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Overlap query.</p>
+</div></span>
   
 </li>
 
@@ -395,26 +409,115 @@ cgranges_init(VALUE self)
       <div class="method_details first">
   <h3 class="signature first" id="add-instance_method">
   
-    #<strong>add</strong>(rb_ctg, rb_st, rb_en, rb_label)  &#x21d2; <tt>Object</tt> 
+    #<strong>add</strong>(rb_ctg, rb_st, rb_en, rb_label)  &#x21d2; <tt><span class='object_link'><a href="" title="Bio::CGRanges (class)">Bio::CGRanges</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a genomic interval to the cgranges object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The label of the interval.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Bio::CGRanges (class)">Bio::CGRanges</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>self</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-110
-111
-112
-113
-114
-115
-116
-117
 118
 119
 120
@@ -437,10 +540,18 @@ cgranges_init(VALUE self)
 137
 138
 139
-140</pre>
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 110</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 118</span>
 
 static VALUE
 cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
@@ -481,62 +592,144 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       <div class="method_details ">
   <h3 class="signature " id="contain-instance_method">
   
-    #<strong>contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
+    #<strong>contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Array</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Containment query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array of [contig, start, end, label] arrays.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
 269
 270
 271
 272
 273
-274</pre>
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 234</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 269</span>
 
 static VALUE
 cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -576,6 +769,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
         4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
+  free(b);
 
   return result;
 }</pre>
@@ -587,204 +781,99 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <div class="method_details ">
   <h3 class="signature " id="count_contain-instance_method">
   
-    #<strong>count_contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
+    #<strong>count_contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Fixnum</tt> 
   
 
   
 
   
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 276</span>
-
-static VALUE
-cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
-{
-  cgranges_t *cr = get_cganges(self);
-  char *ctg = NULL;
-  int32_t st = 0;
-  int32_t en = 0;
-
-  int64_t *b = NULL;
-  int64_t m_b = 0;
-  int64_t n = 0;
-
-  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
-  {
-    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
-    return Qnil;
-  }
-
-  ctg = StringValueCStr(rb_ctg);
-  st = NUM2INT32(rb_st);
-  en = NUM2INT32(rb_en);
-
-  n = cr_contain(cr, ctg, st, en, &amp;b, &amp;m_b);
-
-  if (n &lt; 0)
-  {
-    rb_raise(rb_eRuntimeError, &quot;Error finding contained&quot;);
-    return Qnil;
-  }
-
-  return INT64_2NUM(n);
-}</pre>
-    </td>
-  </tr>
-</table>
-</div>
+</h3><div class="docstring">
+  <div class="discussion">
     
-      <div class="method_details ">
-  <h3 class="signature " id="count_overlap-instance_method">
-  
-    #<strong>count_overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
+<p>Get the number of containing intervals.</p>
 
 
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 201</span>
-
-static VALUE
-cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
-{
-  cgranges_t *cr = get_cganges(self);
-  char *ctg = NULL;
-  int32_t st = 0;
-  int32_t en = 0;
-
-  int64_t *b = NULL;
-  int64_t m_b = 0;
-  int64_t n = 0;
-
-  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
-  {
-    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
-    return Qnil;
-  }
-
-  ctg = StringValueCStr(rb_ctg);
-  st = NUM2INT32(rb_st);
-  en = NUM2INT32(rb_en);
-
-  n = cr_overlap(cr, ctg, st, en, &amp;b, &amp;m_b);
-
-  if (n &lt; 0)
-  {
-    rb_raise(rb_eRuntimeError, &quot;Error finding overlaps&quot;);
-    return Qnil;
-  }
-
-  return INT64_2NUM(n);
-}</pre>
-    </td>
-  </tr>
-</table>
+  </div>
 </div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="coverage-instance_method">
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
-    #<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
   
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
   
+    <li>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The number of containments.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
-  
-</h3><table class="source_code">
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
 319
 320
 321
@@ -817,18 +906,371 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 348
 349
 350
-351
-352
-353
-354
-355
-356
-357
-358
-359</pre>
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 309</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 319</span>
+
+static VALUE
+cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  {
+    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+
+  n = cr_contain(cr, ctg, st, en, &amp;b, &amp;m_b);
+
+  if (n &lt; 0)
+  {
+    rb_raise(rb_eRuntimeError, &quot;Error finding contained&quot;);
+    return Qnil;
+  }
+  free(b);
+
+  return INT64_2NUM(n);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="count_overlap-instance_method">
+  
+    #<strong>count_overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Fixnum</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the number of overlapping intervals.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The number of overlapping intervals.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 228</span>
+
+static VALUE
+cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st = 0;
+  int32_t en = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  {
+    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
+
+  n = cr_overlap(cr, ctg, st, en, &amp;b, &amp;m_b);
+
+  if (n &lt; 0)
+  {
+    rb_raise(rb_eRuntimeError, &quot;Error finding overlaps&quot;);
+    return Qnil;
+  }
+  free(b);
+
+  return INT64_2NUM(n);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="coverage-instance_method">
+  
+    #<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Array</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculate breadth of coverage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The breadth of coverage and the number of intervals.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 360</span>
 
 static VALUE
 cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -878,6 +1320,7 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       cov_en = cov_en &gt; en0 ? cov_en : en0;
   }
   cov += cov_en - cov_st;
+  free(b);
 
   return rb_ary_new3(2, INT64_2NUM(cov), INT64_2NUM(n));
 }</pre>
@@ -889,37 +1332,66 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <div class="method_details ">
   <h3 class="signature " id="index-instance_method">
   
-    #<strong>index</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>index</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Bio::CGRanges (class)">Bio::CGRanges</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Index.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Bio::CGRanges (class)">Bio::CGRanges</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>self</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
 154
 155
 156
-157</pre>
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 142</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 154</span>
 
 static VALUE
 cgranges_index(VALUE self)
@@ -945,37 +1417,99 @@ cgranges_index(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="overlap-instance_method">
   
-    #<strong>overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
+    #<strong>overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Array</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overlap query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array of [contig, start, end, label] arrays.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
 178
 179
 180
@@ -997,10 +1531,30 @@ cgranges_index(VALUE self)
 196
 197
 198
-199</pre>
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 159</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 178</span>
 
 static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -1040,6 +1594,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
         4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
+  free(b);
 
   return result;
 }</pre>
@@ -1053,7 +1608,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Sun May 15 06:10:45 2022 by
+  Generated on Sun May 15 06:49:20 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
