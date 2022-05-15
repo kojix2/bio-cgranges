@@ -219,7 +219,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Get the number of containing intervals.</p>
+<p>Get the number of contained intervals.</p>
 </div></span>
   
 </li>
@@ -252,7 +252,55 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#coverage-instance_method" title="#coverage (instance method)">#<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Array </a>
+      <a href="#coverage-instance_method" title="#coverage (instance method)">#<strong>coverage</strong>(ctg, rb_st, rb_en, mode: :overlap)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calculate breadth of coverage.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#coverage_contain-instance_method" title="#coverage_contain (instance method)">#<strong>coverage_contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calculate breadth of coverage.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#coverage_overlap-instance_method" title="#coverage_overlap (instance method)">#<strong>coverage_overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Array </a>
     
 
     
@@ -803,7 +851,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Get the number of containing intervals.</p>
+<p>Get the number of contained intervals.</p>
 
 
   </div>
@@ -874,7 +922,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
         &mdash;
         <div class='inline'>
-<p>The number of containments.</p>
+<p>The number of contained intervals.</p>
 </div>
       
     </li>
@@ -1136,7 +1184,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <div class="method_details ">
   <h3 class="signature " id="coverage-instance_method">
   
-    #<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Array</tt> 
+    #<strong>coverage</strong>(ctg, rb_st, rb_en, mode: :overlap)  &#x21d2; <tt>Array</tt> 
   
 
   
@@ -1145,7 +1193,159 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Calculate breadth of coverage.</p>
+<p>Calculate breadth of coverage. This is a wrapper method for ‘coverage_overlap` and `coverage_contain`.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>:overlap</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>:overlap or :contain (default: :overlap)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The breadth of coverage and the number of intervals.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#coverage_overlap-instance_method" title="Bio::CGRanges#coverage_overlap (method)">#coverage_overlap</a></span></li>
+    
+      <li><span class='object_link'><a href="#coverage_contain-instance_method" title="Bio::CGRanges#coverage_contain (method)">#coverage_contain</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/cgranges.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_coverage'>coverage</span><span class='lparen'>(</span><span class='id identifier rubyid_ctg'>ctg</span><span class='comma'>,</span> <span class='id identifier rubyid_rb_st'>rb_st</span><span class='comma'>,</span> <span class='id identifier rubyid_rb_en'>rb_en</span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:overlap</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_mode'>mode</span>
+  <span class='kw'>when</span> <span class='symbol'>:overlap</span>
+    <span class='id identifier rubyid_coverage_overlap'>coverage_overlap</span><span class='lparen'>(</span><span class='id identifier rubyid_ctg'>ctg</span><span class='comma'>,</span> <span class='id identifier rubyid_rb_st'>rb_st</span><span class='comma'>,</span> <span class='id identifier rubyid_rb_en'>rb_en</span><span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='symbol'>:contain</span>
+    <span class='id identifier rubyid_coverage_contain'>coverage_contain</span><span class='lparen'>(</span><span class='id identifier rubyid_ctg'>ctg</span><span class='comma'>,</span> <span class='id identifier rubyid_rb_st'>rb_st</span><span class='comma'>,</span> <span class='id identifier rubyid_rb_en'>rb_en</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unknown mode: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_mode'>mode</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="coverage_contain-instance_method">
+  
+    #<strong>coverage_contain</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Array</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculate breadth of coverage. (Containment) same as coverage(contig, start, end, mode: contain)</p>
 
 
   </div>
@@ -1223,119 +1423,162 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#coverage-instance_method" title="Bio::CGRanges#coverage (method)">#coverage</a></span></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408
-409
-410
-411
-412
-413
-414
-415
-416</pre>
+444
+445
+446
+447
+448
+449
+450</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 365</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 444</span>
 
 static VALUE
-cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+cgranges_coverage_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
-  cgranges_t *cr = get_cganges(self);
-  char *ctg = NULL;
-  int32_t st1 = 0;
-  int32_t en1 = 0;
+  VALUE result;
+  result = cgranges_coverage(self, rb_ctg, rb_st, rb_en, 1);
+  return result;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="coverage_overlap-instance_method">
+  
+    #<strong>coverage_overlap</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Array</tt> 
+  
 
-  int64_t *b = NULL;
-  int64_t m_b = 0;
-  int64_t n = 0;
-  int64_t cov = 0, cov_st = 0, cov_en = 0;
+  
 
-  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
-  {
-    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
-    return Qnil;
-  }
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calculate breadth of coverage. (Overlap) Same as coverage(contig, start, end, mode: overlap)</p>
 
-  ctg = StringValueCStr(rb_ctg);
-  st1 = NUM2INT32(rb_st);
-  en1 = NUM2INT32(rb_en);
 
-  n = cr_overlap(cr, ctg, st1, en1, &amp;b, &amp;m_b);
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>contig</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contig name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start position of the interval.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The end position of the interval.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
-  if (n &lt; 0)
-  {
-    rb_raise(rb_eRuntimeError, &quot;Error finding overlaps&quot;);
-    return Qnil;
-  }
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The breadth of coverage and the number of intervals.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
-  for (int64_t j = 0; j &lt; n; j++)
-  {
-    cr_intv_t *r = &amp;cr-&gt;r[b[j]];
-    int32_t st0 = cr_st(r), en0 = cr_en(r);
-    if (st0 &lt; st1)
-      st0 = st1;
-    if (en0 &gt; en1)
-      en0 = en1;
-    if (st0 &gt; cov_en)
-    {
-      cov += cov_en - cov_st;
-      cov_st = st0, cov_en = en0;
-    }
-    else
-      cov_en = cov_en &gt; en0 ? cov_en : en0;
-  }
-  cov += cov_en - cov_st;
-  free(b);
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#coverage-instance_method" title="Bio::CGRanges#coverage (method)">#coverage</a></span></li>
+    
+  </ul>
 
-  return rb_ary_new3(2, INT64_2NUM(cov), INT64_2NUM(n));
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+427
+428
+429
+430
+431
+432
+433</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 427</span>
+
+static VALUE
+cgranges_coverage_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  VALUE result;
+  result = cgranges_coverage(self, rb_ctg, rb_st, rb_en, 0);
+  return result;
 }</pre>
     </td>
   </tr>
@@ -1621,7 +1864,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Sun May 15 07:04:29 2022 by
+  Generated on Sun May 15 07:59:29 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
