@@ -28,18 +28,6 @@ granges.add("chr1", 10, 20, 0)
        .add("chr1", 15, 20, 4)
        .add("chr2", 10, 20, 5)
        .index
-       
-granges.overlap("chr1", 12, 22)
-# [["chr1", 10, 20, 0],
-#  ["chr1", 10, 25, 3],
-#  ["chr1", 15, 25, 1],
-#  ["chr1", 15, 20, 4]]
-
-granges.contain("chr1", 12, 22)
-# [["chr1", 15, 20, 4]]
-
-granges.coverage("chr1", 20, 35)
-# [10, 3] # cov, n
 ```
 
 ```
@@ -53,6 +41,23 @@ granges.coverage("chr1", 20, 35)
            5-5-5-5-5
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 0.........5.........10........15........20........25........30........35........40
+```
+
+```ruby
+granges.overlap("chr1", 12, 22)
+# [["chr1", 10, 20, 0],
+#  ["chr1", 10, 25, 3],
+#  ["chr1", 15, 25, 1],
+#  ["chr1", 15, 20, 4]]
+
+granges.contain("chr1", 12, 22)
+# [["chr1", 15, 20, 4]]
+
+granges.coverage("chr1", 20, 35)
+# [10, 3] # cov, n
+
+granges.coverage("chr1", 12, 22, mode: :contain)
+# [5, 1]
 ```
 
 See [![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://ruby-on-bioc.github.io/bio-cgranges/) for details.
