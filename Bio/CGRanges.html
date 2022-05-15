@@ -244,6 +244,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#coverage-instance_method" title="#coverage (instance method)">#<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Object </a>
     
 
@@ -436,9 +458,9 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
     return Qnil;
   }
 
-  ctg   = StringValueCStr(rb_ctg);
-  st    = NUM2INT32(rb_st);
-  en    = NUM2INT32(rb_en);
+  ctg = StringValueCStr(rb_ctg);
+  st = NUM2INT32(rb_st);
+  en = NUM2INT32(rb_en);
   label = NUM2INT32(rb_label);
 
   intv = cr_add(cr, ctg, st, en, label);
@@ -471,6 +493,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       <pre class="lines">
 
 
+234
 235
 236
 237
@@ -510,12 +533,10 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 271
 272
 273
-274
-275
-276</pre>
+274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 235</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 234</span>
 
 static VALUE
 cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -538,7 +559,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_contain(cr, ctg, st, en, &amp;b, &amp;m_b);
 
   if (n &lt; 0)
@@ -552,8 +573,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   for (int64_t i = 0; i &lt; n; i++)
   {
     VALUE rb_intv = rb_ary_new3(
-      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
-    );
+        4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
 
@@ -579,6 +599,8 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
+276
+277
 278
 279
 280
@@ -608,12 +630,10 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 304
 305
 306
-307
-308
-309</pre>
+307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 278</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 276</span>
 
 static VALUE
 cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -636,7 +656,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_contain(cr, ctg, st, en, &amp;b, &amp;m_b);
 
   if (n &lt; 0)
@@ -667,6 +687,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       <pre class="lines">
 
 
+201
 202
 203
 204
@@ -697,11 +718,10 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 229
 230
 231
-232
-233</pre>
+232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 202</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 201</span>
 
 static VALUE
 cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -724,7 +744,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_overlap(cr, ctg, st, en, &amp;b, &amp;m_b);
 
   if (n &lt; 0)
@@ -734,6 +754,132 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   }
 
   return INT64_2NUM(n);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="coverage-instance_method">
+  
+    #<strong>coverage</strong>(rb_ctg, rb_st, rb_en)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 309</span>
+
+static VALUE
+cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  cgranges_t *cr = get_cganges(self);
+  char *ctg = NULL;
+  int32_t st1 = 0;
+  int32_t en1 = 0;
+
+  int64_t *b = NULL;
+  int64_t m_b = 0;
+  int64_t n = 0;
+  int64_t cov = 0, cov_st = 0, cov_en = 0;
+
+  if (!RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  {
+    rb_raise(rb_eNoIndexError, &quot;CGRanges not indexed&quot;);
+    return Qnil;
+  }
+
+  ctg = StringValueCStr(rb_ctg);
+  st1 = NUM2INT32(rb_st);
+  en1 = NUM2INT32(rb_en);
+
+  n = cr_overlap(cr, ctg, st1, en1, &amp;b, &amp;m_b);
+
+  if (n &lt; 0)
+  {
+    rb_raise(rb_eRuntimeError, &quot;Error finding overlaps&quot;);
+    return Qnil;
+  }
+
+  for (int64_t j = 0; j &lt; n; j++)
+  {
+    cr_intv_t *r = &amp;cr-&gt;r[b[j]];
+    int32_t st0 = cr_st(r), en0 = cr_en(r);
+    if (st0 &lt; st1)
+      st0 = st1;
+    if (en0 &gt; en1)
+      en0 = en1;
+    if (st0 &gt; cov_en)
+    {
+      cov += cov_en - cov_st;
+      cov_st = st0, cov_en = en0;
+    }
+    else
+      cov_en = cov_en &gt; en0 ? cov_en : en0;
+  }
+  cov += cov_en - cov_st;
+
+  return rb_ary_new3(2, INT64_2NUM(cov), INT64_2NUM(n));
 }</pre>
     </td>
   </tr>
@@ -778,7 +924,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 static VALUE
 cgranges_index(VALUE self)
 {
-  if(RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
+  if (RTEST(rb_ivar_get(self, rb_intern(&quot;@indexed&quot;))))
   {
     rb_raise(rb_eIndexedError, &quot;CGRanges already indexed&quot;);
     return Qnil;
@@ -786,7 +932,7 @@ cgranges_index(VALUE self)
 
   cgranges_t *cr = get_cganges(self);
   cr_index(cr);
-  
+
   rb_ivar_set(self, rb_intern(&quot;@indexed&quot;), Qtrue);
 
   return self;
@@ -851,8 +997,7 @@ cgranges_index(VALUE self)
 196
 197
 198
-199
-200</pre>
+199</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'ext/bio/cgranges/cgranges.c', line 159</span>
@@ -878,7 +1023,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   ctg = StringValueCStr(rb_ctg);
   st = NUM2INT32(rb_st);
   en = NUM2INT32(rb_en);
-  
+
   n = cr_overlap(cr, ctg, st, en, &amp;b, &amp;m_b);
 
   if (n &lt; 0)
@@ -892,8 +1037,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   for (int64_t i = 0; i &lt; n; i++)
   {
     VALUE rb_intv = rb_ary_new3(
-      4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i]))
-    );
+        4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
 
@@ -909,7 +1053,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Sun May 15 05:28:47 2022 by
+  Generated on Sun May 15 06:10:45 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
