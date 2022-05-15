@@ -107,6 +107,14 @@ cgranges_init(VALUE self)
   return self;
 }
 
+/* Add a genomic interval to the cgranges object.
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @param [Fixnum] label The label of the interval.
+ * @return [Bio::CGRanges] self
+ */
+
 static VALUE
 cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 {
@@ -139,6 +147,10 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
   return self;
 }
 
+/* Index.
+ * @return [Bio::CGRanges] self
+ */
+
 static VALUE
 cgranges_index(VALUE self)
 {
@@ -155,6 +167,13 @@ cgranges_index(VALUE self)
 
   return self;
 }
+
+/* Overlap query.
+  * @param [String] contig The contig name
+  * @param [Fixnum] start The start position of the interval.
+  * @param [Fixnum] end The end position of the interval.
+  * @return [Array] An array of [contig, start, end, label] arrays.
+  */
 
 static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -199,6 +218,13 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   return result;
 }
 
+/* Get the number of overlapping intervals.
+  * @param [String] contig The contig name
+  * @param [Fixnum] start The start position of the interval.
+  * @param [Fixnum] end The end position of the interval.
+  * @return [Fixnum] The number of overlapping intervals.
+  */
+
 static VALUE
 cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
@@ -232,6 +258,13 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   return INT64_2NUM(n);
 }
+
+/* Containment query.
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @return [Array] An array of [contig, start, end, label] arrays.
+ */
 
 static VALUE
 cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
@@ -276,6 +309,13 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   return result;
 }
 
+/* Get the number of containing intervals.
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @return [Fixnum] The number of containments.
+ */
+
 static VALUE
 cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
@@ -309,6 +349,13 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   return INT64_2NUM(n);
 }
+
+/* Calculate breadth of coverage.
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @return [Array] The breadth of coverage and the number of intervals. 
+ */
 
 static VALUE
 cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
