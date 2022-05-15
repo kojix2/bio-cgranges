@@ -314,11 +314,11 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   return result;
 }
 
-/* Get the number of containing intervals.
+/* Get the number of contained intervals.
  * @param [String] contig The contig name
  * @param [Fixnum] start The start position of the interval.
  * @param [Fixnum] end The end position of the interval.
- * @return [Fixnum] The number of containments.
+ * @return [Fixnum] The number of contained intervals.
  */
 
 static VALUE
@@ -355,15 +355,8 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   return INT64_2NUM(n);
 }
 
-/* Calculate breadth of coverage.
- * @param [String] contig The contig name
- * @param [Fixnum] start The start position of the interval.
- * @param [Fixnum] end The end position of the interval.
- * @return [Array] The breadth of coverage and the number of intervals.
- */
-
 static VALUE
-cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, int contain)
 {
   cgranges_t *cr = get_cganges(self);
   char *ctg = NULL;
@@ -385,7 +378,14 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   st1 = NUM2INT32(rb_st);
   en1 = NUM2INT32(rb_en);
 
-  n = cr_overlap(cr, ctg, st1, en1, &b, &m_b);
+  if (contain)
+  {
+    n = cr_contain(cr, ctg, st1, en1, &b, &m_b);
+  }
+  else
+  {
+    n = cr_overlap(cr, ctg, st1, en1, &b, &m_b);
+  }
 
   if (n < 0)
   {
@@ -415,6 +415,40 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   return rb_ary_new3(2, INT64_2NUM(cov), INT64_2NUM(n));
 }
 
+/* Calculate breadth of coverage. (Overlap)
+ * Same as coverage(contig, start, end, mode: overlap)
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @return [Array] The breadth of coverage and the number of intervals.
+ * @see coverage
+ */
+
+static VALUE
+cgranges_coverage_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  VALUE result;
+  result = cgranges_coverage(self, rb_ctg, rb_st, rb_en, 0);
+  return result;
+}
+
+/* Calculate breadth of coverage. (Containment)
+ * same as coverage(contig, start, end, mode: contain)
+ * @param [String] contig The contig name
+ * @param [Fixnum] start The start position of the interval.
+ * @param [Fixnum] end The end position of the interval.
+ * @return [Array] The breadth of coverage and the number of intervals.
+ * @see coverage
+ */
+
+static VALUE
+cgranges_coverage_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
+{
+  VALUE result;
+  result = cgranges_coverage(self, rb_ctg, rb_st, rb_en, 1);
+  return result;
+}
+
 void Init_cgranges(void)
 {
   rb_Bio = rb_define_module("Bio");
@@ -431,5 +465,6 @@ void Init_cgranges(void)
   rb_define_method(rb_CGRanges, "count_overlap", cgranges_count_overlap, 3);
   rb_define_method(rb_CGRanges, "contain", cgranges_contain, 3);
   rb_define_method(rb_CGRanges, "count_contain", cgranges_count_contain, 3);
-  rb_define_method(rb_CGRanges, "coverage", cgranges_coverage, 3);
+  rb_define_method(rb_CGRanges, "coverage_overlap", cgranges_coverage_overlap, 3);
+  rb_define_method(rb_CGRanges, "coverage_contain", cgranges_coverage_contain, 3);
 }

@@ -153,7 +153,7 @@ class CGRangesTest < Test::Unit::TestCase
     assert_raises(TypeError) { cgranges.count_contain("chr1", 12, nil) }
   end
 
-  def test_coverage1
+  def test_coverage_overlap1
     cgranges = Bio::CGRanges.new
     cgranges.add("chr1", 10, 20, 0)
     cgranges.add("chr1", 30, 40, 2)
@@ -161,12 +161,12 @@ class CGRangesTest < Test::Unit::TestCase
     cgranges.add("chr1", 5, 10, 5)
     cgranges.add("chr2", 10, 20, 6)
     cgranges.index
-    act = cgranges.coverage("chr1", 12, 22)
+    act = cgranges.coverage_overlap("chr1", 12, 22)
     exp = [8, 2]
     assert_equal exp, act
   end
 
-  def test_coverage2
+  def test_coverage_overlap2
     cgr = Bio::CGRanges.new
     act = cgr.add("chr1", 15, 25, 1)
              .add("chr1", 30, 40, 2)
@@ -174,29 +174,67 @@ class CGRangesTest < Test::Unit::TestCase
              .add("chr1", 5, 10, 5)
              .add("chr2", 10, 20, 6)
              .index
-             .coverage("chr1", 12, 22)
+             .coverage_overlap("chr1", 12, 22)
     exp = [7, 2]
     assert_equal exp, act
   end
 
-  def test_coverage3
+  def test_coverage_overlap3
     cranges = prepare_crange.index
-    act = cranges.coverage("chr1", 3, 43)
+    act = cranges.coverage_overlap("chr1", 3, 43)
     exp = [30, 6]
     assert_equal exp, act
   end
 
-  def test_coverage_without_index
+  def test_coverage_overlap_without_index
     cgranges = prepare_crange
     assert_raises(Bio::CGRanges::NoIndexError) do
-      cgranges.coverage("chr1", 12, 22)
+      cgranges.coverage_overlap("chr1", 12, 22)
     end
   end
 
-  def test_coverage_nil
+  def test_coverage_overlap_nil
     cgranges = prepare_crange.index
-    assert_raises(TypeError) { cgranges.coverage(nil, 12, 22)     }
-    assert_raises(TypeError) { cgranges.coverage("chr1", nil, 22) }
-    assert_raises(TypeError) { cgranges.coverage("chr1", 12, nil) }
+    assert_raises(TypeError) { cgranges.coverage_overlap(nil, 12, 22)     }
+    assert_raises(TypeError) { cgranges.coverage_overlap("chr1", nil, 22) }
+    assert_raises(TypeError) { cgranges.coverage_overlap("chr1", 12, nil) }
+  end
+
+  def test_coverage_contain1
+    cranges = prepare_crange.index
+    act = cranges.coverage_contain("chr1", 12, 22)
+    exp = [5, 1]
+    assert_equal exp, act
+  end
+
+  def test_coverage_contain3
+    cranges = prepare_crange.index
+    act = cranges.coverage_contain("chr1", 3, 43)
+    exp = [30, 6]
+    assert_equal exp, act
+  end
+
+  def test_coverage_contain_without_index
+    cgranges = prepare_crange
+    assert_raises(Bio::CGRanges::NoIndexError) do
+      cgranges.coverage_contain("chr1", 12, 22)
+    end
+  end
+
+  def test_coverage_contain_nil
+    cgranges = prepare_crange.index
+    assert_raises(TypeError) { cgranges.coverage_contain(nil, 12, 22)     }
+    assert_raises(TypeError) { cgranges.coverage_contain("chr1", nil, 22) }
+    assert_raises(TypeError) { cgranges.coverage_contain("chr1", 12, nil) }
+  end
+
+  def test_coverage
+    cranges = prepare_crange.index
+    act = cranges.coverage("chr1", 15, 20)
+    exp = [5, 4]
+    assert_equal exp, act
+    act = cranges.coverage("chr1", 15, 20, mode: :contain)
+    exp = [5, 1]
+    assert_equal exp, act
   end
 end
