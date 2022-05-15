@@ -85,19 +85,7 @@
        <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>15</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>4</span><span class='rparen'>)</span>
        <span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>5</span><span class='rparen'>)</span>
        <span class='period'>.</span><span class='id identifier rubyid_index'>index</span>
-       
-<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_overlap'>overlap</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>22</span><span class='rparen'>)</span>
-<span class='comment'># [[&quot;chr1&quot;, 10, 20, 0],
-</span><span class='comment'>#  [&quot;chr1&quot;, 10, 25, 3],
-</span><span class='comment'>#  [&quot;chr1&quot;, 15, 25, 1],
-</span><span class='comment'>#  [&quot;chr1&quot;, 15, 20, 4]]
-</span>
-<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_contain'>contain</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>22</span><span class='rparen'>)</span>
-<span class='comment'># [[&quot;chr1&quot;, 15, 20, 4]]
-</span>
-<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_coverage'>coverage</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>35</span><span class='rparen'>)</span>
-<span class='comment'># [10, 3] # cov, n
-</span></code></pre>
+</code></pre>
 
 <pre class="code ruby"><code class="ruby">0.........5.........10........15........20........25........30........35........40
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
@@ -110,6 +98,22 @@
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 0.........5.........10........15........20........25........30........35........40
 </code></pre>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_overlap'>overlap</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>22</span><span class='rparen'>)</span>
+<span class='comment'># [[&quot;chr1&quot;, 10, 20, 0],
+</span><span class='comment'>#  [&quot;chr1&quot;, 10, 25, 3],
+</span><span class='comment'>#  [&quot;chr1&quot;, 15, 25, 1],
+</span><span class='comment'>#  [&quot;chr1&quot;, 15, 20, 4]]
+</span>
+<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_contain'>contain</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>22</span><span class='rparen'>)</span>
+<span class='comment'># [[&quot;chr1&quot;, 15, 20, 4]]
+</span>
+<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_coverage'>coverage</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='int'>35</span><span class='rparen'>)</span>
+<span class='comment'># [10, 3] # cov, n
+</span>
+<span class='id identifier rubyid_granges'>granges</span><span class='period'>.</span><span class='id identifier rubyid_coverage'>coverage</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='comma'>,</span> <span class='int'>22</span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:contain</span><span class='rparen'>)</span>
+<span class='comment'># [5, 1]
+</span></code></pre>
 
 <p>See <a href="https://ruby-on-bioc.github.io/bio-cgranges/"><img src="https://img.shields.io/badge/docs-latest-blue.svg"></a> for details.</p>
 
@@ -128,7 +132,7 @@ If so, please feel free to contact us.
 </div></div>
 
       <div id="footer">
-  Generated on Sun May 15 07:59:28 2022 by
+  Generated on Sun May 15 08:19:53 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.1.2).
 </div>
