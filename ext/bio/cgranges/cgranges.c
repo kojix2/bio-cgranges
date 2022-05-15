@@ -94,6 +94,11 @@ cgranges_allocate(VALUE klass)
   return TypedData_Wrap_Struct(klass, &cgranges_type, ptr);
 }
 
+/* Create a new cgranges object
+ *
+ * @return [Bio::CGRanges]
+ */
+
 static VALUE
 cgranges_init(VALUE self)
 {
