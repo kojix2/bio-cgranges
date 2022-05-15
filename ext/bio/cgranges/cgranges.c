@@ -194,6 +194,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
         4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
+  free(b);
 
   return result;
 }
@@ -227,6 +228,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
     rb_raise(rb_eRuntimeError, "Error finding overlaps");
     return Qnil;
   }
+  free(b);
 
   return INT64_2NUM(n);
 }
@@ -269,6 +271,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
         4, rb_ctg, INT32_2NUM(cr_start(cr, b[i])), INT32_2NUM(cr_end(cr, b[i])), INT32_2NUM(cr_label(cr, b[i])));
     rb_ary_push(result, rb_intv);
   }
+  free(b);
 
   return result;
 }
@@ -302,6 +305,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
     rb_raise(rb_eRuntimeError, "Error finding contained");
     return Qnil;
   }
+  free(b);
 
   return INT64_2NUM(n);
 }
@@ -354,6 +358,7 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       cov_en = cov_en > en0 ? cov_en : en0;
   }
   cov += cov_en - cov_st;
+  free(b);
 
   return rb_ary_new3(2, INT64_2NUM(cov), INT64_2NUM(n));
 }
