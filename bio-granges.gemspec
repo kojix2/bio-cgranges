@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Ruby bindings for lh3/cgranges"
   spec.description   = "Genomic interval overlap queries"
-  spec.homepage      = "https://github.com/ruby-on-bioc/bio-cgranges"
+  spec.homepage      = "https://github.com/kojix2/bio-cgranges"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
 
