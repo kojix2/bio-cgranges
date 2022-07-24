@@ -64,6 +64,13 @@ See [![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://kojix2.
 
 ## Development
 
+```sh
+git clone https://github.com/kojix2/bio-cgranges
+bundle install
+bundle exec rake compile
+bundle exec rake test
+```
+
 Bug reports and pull requests are welcome on GitHub at https://github.com/kojix2/bio-cgranges.
 
     Do you need commit rights to this repository?
