@@ -9,10 +9,6 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList["test/**/*_test.rb"]
 end
 
-require "rubocop/rake_task"
-
-RuboCop::RakeTask.new
-
 require "rake/extensiontask"
 
 task build: :compile
@@ -34,7 +30,6 @@ task default: %i[
   compile
   remove_object_file
   test
-  rubocop
 ]
 
 task cleanall: %i[
