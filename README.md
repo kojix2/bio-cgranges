@@ -4,6 +4,7 @@
 [![test](https://github.com/kojix2/bio-cgranges/actions/workflows/ci.yml/badge.svg)](https://github.com/kojix2/bio-cgranges/actions/workflows/ci.yml)
 [![docs](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/bio-cgranges)
 [![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://kojix2.github.io/bio-cgranges/)
+[![DOI](https://zenodo.org/badge/491354623.svg)](https://zenodo.org/badge/latestdoi/491354623)
 
 Ruby bindings to [lh3/cgranges](https://github.com/lh3/cgranges).
 
