@@ -50,15 +50,12 @@ static void cgranges_free(void *ptr);
 static size_t cgranges_memsize(const void *ptr);
 
 static const rb_data_type_t cgranges_type = {
-    "cgranges",
-    {
-        0,
-        cgranges_free,
-        cgranges_memsize,
+    .wrap_struct_name = "cgranges",
+    .function = {
+        .dfree = cgranges_free,
+        .dsize = cgranges_memsize,
     },
-    0,
-    0,
-    RUBY_TYPED_FREE_IMMEDIATELY,
+    .flags = RUBY_TYPED_FREE_IMMEDIATELY,
 };
 
 static void
