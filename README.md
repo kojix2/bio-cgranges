@@ -72,7 +72,7 @@ bundle exec rake compile
 bundle exec rake test
 ```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/kojix2/bio-cgranges.
+Bug reports and pull requests are welcome on GitHub at <https://github.com/kojix2/bio-cgranges>.
 
     Do you need commit rights to this repository?
     Do you want to get admin rights and take over the project?
