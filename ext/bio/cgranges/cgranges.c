@@ -75,7 +75,7 @@ cgranges_memsize(const void *ptr)
   return data ? sizeof(*data) : 0;
 }
 
-static cgranges_t *get_cganges(VALUE self)
+static cgranges_t *get_cgranges(VALUE self)
 {
   cgranges_t *ptr = NULL;
   TypedData_Get_Struct(self, cgranges_t, &cgranges_type, ptr);
@@ -120,7 +120,7 @@ cgranges_init(VALUE self)
 static VALUE
 cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
 {
-  cgranges_t *cr = get_cganges(self);
+  cgranges_t *cr = get_cgranges(self);
   cr_intv_t *intv = NULL;
   char *ctg = NULL;
   int32_t st = 0;
@@ -162,7 +162,7 @@ cgranges_index(VALUE self)
     return Qnil;
   }
 
-  cgranges_t *cr = get_cganges(self);
+  cgranges_t *cr = get_cgranges(self);
   cr_index(cr);
 
   rb_ivar_set(self, rb_intern("@indexed"), Qtrue);
@@ -180,7 +180,7 @@ cgranges_index(VALUE self)
 static VALUE
 cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
-  cgranges_t *cr = get_cganges(self);
+  cgranges_t *cr = get_cgranges(self);
   char *ctg = NULL;
   int32_t st = 0;
   int32_t en = 0;
@@ -230,7 +230,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 static VALUE
 cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
-  cgranges_t *cr = get_cganges(self);
+  cgranges_t *cr = get_cgranges(self);
   char *ctg = NULL;
   int32_t st = 0;
   int32_t en = 0;
@@ -271,7 +271,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 static VALUE
 cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
-  cgranges_t *cr = get_cganges(self);
+  cgranges_t *cr = get_cgranges(self);
   char *ctg = NULL;
   int32_t st = 0;
   int32_t en = 0;
@@ -321,7 +321,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 static VALUE
 cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 {
-  cgranges_t *cr = get_cganges(self);
+  cgranges_t *cr = get_cgranges(self);
   char *ctg = NULL;
   int32_t st = 0;
   int32_t en = 0;
@@ -355,7 +355,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 static VALUE
 cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, int contain)
 {
-  cgranges_t *cr = get_cganges(self);
+  cgranges_t *cr = get_cgranges(self);
   char *ctg = NULL;
   int32_t st1 = 0;
   int32_t en1 = 0;
