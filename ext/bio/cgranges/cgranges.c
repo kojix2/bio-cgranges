@@ -203,6 +203,7 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   if (n < 0)
   {
+    free(b);
     rb_raise(rb_eRuntimeError, "Error finding overlaps");
     return Qnil;
   }
@@ -253,6 +254,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   if (n < 0)
   {
+    free(b);
     rb_raise(rb_eRuntimeError, "Error finding overlaps");
     return Qnil;
   }
@@ -294,6 +296,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   if (n < 0)
   {
+    free(b);
     rb_raise(rb_eRuntimeError, "Error finding contained");
     return Qnil;
   }
@@ -344,6 +347,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 
   if (n < 0)
   {
+    free(b);
     rb_raise(rb_eRuntimeError, "Error finding contained");
     return Qnil;
   }
@@ -386,6 +390,7 @@ cgranges_coverage(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, int contai
 
   if (n < 0)
   {
+    free(b);
     rb_raise(rb_eRuntimeError, "Error finding overlaps");
     return Qnil;
   }
