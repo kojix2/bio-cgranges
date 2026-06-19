@@ -6,13 +6,13 @@
 <title>
   Class: Bio::CGRanges
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.44
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Bio::CGRanges";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -94,8 +96,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/bio/cgranges.rb<span class="defines">,<br />
-  lib/bio/cgranges/version.rb,<br /> ext/bio/cgranges/cgranges.c</span>
+    <dd>lib/bio/cgranges.rb<span class="defines">,<br>
+  lib/bio/cgranges/version.rb,<br> ext/bio/cgranges/cgranges.c</span>
+
 </dd>
   </dl>
   
@@ -103,9 +106,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Reader for .2bit files (i.e., from UCSC genome browser)</p>
-
+    <p>Reader for .2bit files (i.e., from UCSC genome browser)</p>
 
   </div>
 </div>
@@ -170,9 +171,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Add a genomic interval to the cgranges object.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Add a genomic interval to the cgranges object.</p></div></span>
   
 </li>
 
@@ -194,9 +193,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Containment query.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Containment query.</p></div></span>
   
 </li>
 
@@ -218,9 +215,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the number of contained intervals.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Get the number of contained intervals.</p></div></span>
   
 </li>
 
@@ -242,9 +237,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the number of overlapping intervals.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Get the number of overlapping intervals.</p></div></span>
   
 </li>
 
@@ -266,9 +259,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Calculate breadth of coverage.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Calculate breadth of coverage.</p></div></span>
   
 </li>
 
@@ -290,9 +281,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Calculate breadth of coverage.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Calculate breadth of coverage.</p></div></span>
   
 </li>
 
@@ -314,9 +303,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Calculate breadth of coverage.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Calculate breadth of coverage.</p></div></span>
   
 </li>
 
@@ -338,9 +325,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Index.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Index.</p></div></span>
   
 </li>
 
@@ -364,9 +349,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create a new cgranges object.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Create a new cgranges object.</p></div></span>
   
 </li>
 
@@ -388,14 +371,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Overlap query.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Overlap query.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -412,9 +394,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create a new cgranges object</p>
-
+    <p>Create a new cgranges object</p>
 
   </div>
 </div>
@@ -478,9 +458,7 @@ cgranges_init(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Add a genomic interval to the cgranges object.</p>
-
+    <p>Add a genomic interval to the cgranges object.</p>
 
   </div>
 </div>
@@ -498,9 +476,7 @@ cgranges_init(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -514,9 +490,7 @@ cgranges_init(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -530,9 +504,7 @@ cgranges_init(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -546,9 +518,7 @@ cgranges_init(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>The label of the interval.</p>
-</div>
+        <div class='inline'><p>The label of the interval.</p></div>
       
     </li>
   
@@ -565,9 +535,7 @@ cgranges_init(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>self</p>
-</div>
+        <div class='inline'><p>self</p></div>
       
     </li>
   
@@ -661,9 +629,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Containment query.</p>
-
+    <p>Containment query.</p>
 
   </div>
 </div>
@@ -681,9 +647,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -697,9 +661,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -713,9 +675,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -732,9 +692,7 @@ cgranges_add(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en, VALUE rb_label)
       
       
         &mdash;
-        <div class='inline'>
-<p>An array of [contig, start, end, label] arrays.</p>
-</div>
+        <div class='inline'><p>An array of [contig, start, end, label] arrays.</p></div>
       
     </li>
   
@@ -852,9 +810,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the number of contained intervals.</p>
-
+    <p>Get the number of contained intervals.</p>
 
   </div>
 </div>
@@ -872,9 +828,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -888,9 +842,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -904,9 +856,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -923,9 +873,7 @@ cgranges_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The number of contained intervals.</p>
-</div>
+        <div class='inline'><p>The number of contained intervals.</p></div>
       
     </li>
   
@@ -1025,9 +973,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the number of overlapping intervals.</p>
-
+    <p>Get the number of overlapping intervals.</p>
 
   </div>
 </div>
@@ -1045,9 +991,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -1061,9 +1005,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -1077,9 +1019,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -1096,9 +1036,7 @@ cgranges_count_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The number of overlapping intervals.</p>
-</div>
+        <div class='inline'><p>The number of overlapping intervals.</p></div>
       
     </li>
   
@@ -1198,9 +1136,8 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Calculate breadth of coverage. This is a wrapper method for ‘coverage_overlap` and `coverage_contain`.</p>
-
+    <p>Calculate breadth of coverage.
+This is a wrapper method for <code>coverage_overlap</code> and <code>coverage_contain</code>.</p>
 
   </div>
 </div>
@@ -1218,9 +1155,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -1234,9 +1169,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -1250,9 +1183,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -1268,9 +1199,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>:overlap or :contain (default: :overlap)</p>
-</div>
+        <div class='inline'><p>:overlap or :contain (default: :overlap)</p></div>
       
     </li>
   
@@ -1287,9 +1216,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The breadth of coverage and the number of intervals.</p>
-</div>
+        <div class='inline'><p>The breadth of coverage and the number of intervals.</p></div>
       
     </li>
   
@@ -1350,9 +1277,8 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Calculate breadth of coverage. (Containment) same as coverage(contig, start, end, mode: contain)</p>
-
+    <p>Calculate breadth of coverage. (Containment)
+same as coverage(contig, start, end, mode: contain)</p>
 
   </div>
 </div>
@@ -1370,9 +1296,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -1386,9 +1310,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -1402,9 +1324,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -1421,9 +1341,7 @@ cgranges_count_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The breadth of coverage and the number of intervals.</p>
-</div>
+        <div class='inline'><p>The breadth of coverage and the number of intervals.</p></div>
       
     </li>
   
@@ -1476,9 +1394,8 @@ cgranges_coverage_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Calculate breadth of coverage. (Overlap) Same as coverage(contig, start, end, mode: overlap)</p>
-
+    <p>Calculate breadth of coverage. (Overlap)
+Same as coverage(contig, start, end, mode: overlap)</p>
 
   </div>
 </div>
@@ -1496,9 +1413,7 @@ cgranges_coverage_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -1512,9 +1427,7 @@ cgranges_coverage_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -1528,9 +1441,7 @@ cgranges_coverage_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -1547,9 +1458,7 @@ cgranges_coverage_contain(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>The breadth of coverage and the number of intervals.</p>
-</div>
+        <div class='inline'><p>The breadth of coverage and the number of intervals.</p></div>
       
     </li>
   
@@ -1602,9 +1511,7 @@ cgranges_coverage_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Index.</p>
-
+    <p>Index.</p>
 
   </div>
 </div>
@@ -1621,9 +1528,7 @@ cgranges_coverage_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
       
       
         &mdash;
-        <div class='inline'>
-<p>self</p>
-</div>
+        <div class='inline'><p>self</p></div>
       
     </li>
   
@@ -1687,9 +1592,7 @@ cgranges_index(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Overlap query.</p>
-
+    <p>Overlap query.</p>
 
   </div>
 </div>
@@ -1707,9 +1610,7 @@ cgranges_index(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>The contig name</p>
-</div>
+        <div class='inline'><p>The contig name</p></div>
       
     </li>
   
@@ -1723,9 +1624,7 @@ cgranges_index(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>The start position of the interval.</p>
-</div>
+        <div class='inline'><p>The start position of the interval.</p></div>
       
     </li>
   
@@ -1739,9 +1638,7 @@ cgranges_index(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>The end position of the interval.</p>
-</div>
+        <div class='inline'><p>The end position of the interval.</p></div>
       
     </li>
   
@@ -1758,9 +1655,7 @@ cgranges_index(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>An array of [contig, start, end, label] arrays.</p>
-</div>
+        <div class='inline'><p>An array of [contig, start, end, label] arrays.</p></div>
       
     </li>
   
@@ -1872,9 +1767,9 @@ cgranges_overlap(VALUE self, VALUE rb_ctg, VALUE rb_st, VALUE rb_en)
 </div>
 
       <div id="footer">
-  Generated on Fri Nov 21 09:52:00 2025 by
+  Generated on Fri Jun 19 00:33:39 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.4.7).
+  0.9.44 (ruby-4.0.5).
 </div>
 
     </div>
